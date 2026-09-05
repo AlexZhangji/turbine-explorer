@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gas Turbine | Ji Zhang</title>
+<title>Gas Turbine: A Closer Look | Ji Zhang</title>
 <meta name="author" content="Ji Zhang">
 <meta name="description" content="An interactive gas turbine built in Three.js: open the casing, separate its assemblies, and explore a cooled blade.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ji Zhang">
-<meta property="og:title" content="Gas Turbine">
+<meta property="og:title" content="Gas Turbine: A Closer Look">
 <meta property="og:description" content="Open the casing, separate the assemblies, and look inside a cooled turbine blade. An interactive experiment by Ji Zhang.">
 <meta property="og:url" content="https://jizhang.io/articles/gas-turbine/">
 <meta property="og:image" content="https://jizhang.io/articles/gas-turbine/og-exploded-light.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="720">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gas Turbine | Ji Zhang">
+<meta name="twitter:title" content="Gas Turbine: A Closer Look | Ji Zhang">
 <meta name="twitter:description" content="A composable Three.js machine, from the whole assembly to the inside of a cooled blade.">
 <meta name="twitter:image" content="https://jizhang.io/articles/gas-turbine/og-exploded-light.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -29,8 +29,8 @@
 <body class="lang-en"><article class="shell">
 <nav class="topbar"><a data-follow-language href="/articles/?lang=en">JIZHANG.IO / ARTICLES</a><div class="toggle"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中</button></div></nav>
 <div class="date">2026 · 09 · 05 / LABS</div>
-<h1>Gas Turbine</h1>
-<p><span class="en-only">Through power-sector investing and behind-the-meter research, I had long known about GE Vernova and gas turbines as a choke point. But I have to confess: I underestimated them. I thought they were easy to make and not particularly big. Seeing one, I realized how complex, interesting and beautiful they are. So I made this interactive model to atone for my ignorance, HH.</span><span class="zh-only">做电力投资和 behind-the-meter 研究时, 我早就知道 GE Vernova 和燃气轮机是一个 choke point. 但我得承认, 我低估了它们, 以为没多难做, 也没多大. 真正看到才发现, 它们比想象中复杂和有趣, 而且非常漂亮. 所以做了这个交互模型, 算是为自己无知的赎罪, HH.</span></p>
+<h1><span class="en-only">Gas Turbine: A Closer Look</span><span class="zh-only">Gas Turbine: 近看燃气轮机</span></h1>
+<p><span class="en-only">Through power-sector investing and behind-the-meter research, I knew about GE Vernova and gas turbines as a choke point. But I have to admit, I completely underestimated them. I thought they weren't that hard to make, or that big.<br>Seeing one, I realized they were far more complex than I had imagined, and very beautiful. So I made this interactive model, a little atonement for my ignorance haha</span><span class="zh-only">做电力投资和 behind-the-meter 研究时, 我知道 GE Vernova 和燃气轮机是一个 choke point. 但得承认, 我完全低估了它们, 以为没多难做, 也没多大.<br>真正看到才发现, 它们比想象中复杂得多, 而且非常漂亮. 所以做了这个交互模型, 算是为自己无知的赎罪hh</span></p>
 <img class="hero" src="./og-exploded-light.png" width="1280" height="720" alt="Exploded gas turbine assembly on a light studio background, built in Three.js">
 <div class="launch"><a class="primary" data-follow-language href="https://labs.jizhang.io/gas-turbine/?lang=en"><span class="en-only">Explore the gas turbine ↗</span><span class="zh-only">打开交互模型 ↗</span></a><a href="https://github.com/AlexZhangji/turbine-explorer">GitHub · MIT ↗</a></div>
 <p><span class="en-only">The model is composable, with parts you can separate and inspect. I also made a cooled-blade study. Real turbine blades use cooling and coatings to work in <a href="https://www.nasa.gov/wp-content/uploads/2015/01/601288main_NASAsContributionsToAeronauticsVolume1-ebook.pdf">gas hotter than the alloy's melting point</a> while keeping the metal cooler. That cooling design in the real blade is what I find beautiful.</span><span class="zh-only">模型是 composable 的, 可以拆开并放大看部分组件. 我还单独做了冷却叶片的原理模型. 真实叶片靠冷却和涂层, 能在<a href="https://www.nasa.gov/wp-content/uploads/2015/01/601288main_NASAsContributionsToAeronauticsVolume1-ebook.pdf">温度超过合金熔点的燃气</a>中工作, 同时让金属保持更低的温度. 我觉得真实叶片的这种冷却设计非常漂亮.</span></p>
@@ -43,7 +43,10 @@
     lang=lang==='zh'?'zh':'en';
     document.documentElement.lang=lang==='zh'?'zh-CN':'en';
     document.body.className='lang-'+lang;
-    document.title='Gas Turbine | Ji Zhang';
+    const title=lang==='zh'?'Gas Turbine: 近看燃气轮机':'Gas Turbine: A Closer Look';
+    document.title=title+' | Ji Zhang';
+    document.querySelector('meta[property="og:title"]').content=title;
+    document.querySelector('meta[name="twitter:title"]').content=document.title;
     document.querySelectorAll('button[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
     document.querySelectorAll('a[data-follow-language]').forEach(a=>{const u=new URL(a.href);u.searchParams.set('lang',lang);a.href=u.href;});
     const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u);
