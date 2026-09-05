@@ -21,17 +21,32 @@
   <style>
     @font-face{font-family:Manrope;src:url('/gas-turbine/fonts/Manrope-Variable.ttf');font-weight:200 800;font-display:swap}
     *{box-sizing:border-box}body{margin:0;background:#0a131a;color:#e3ebee;font:15px Manrope,system-ui,sans-serif}a{color:inherit;text-decoration:none}header,main,footer{max-width:1120px;margin:auto;padding:36px 36px}header{display:flex;justify-content:space-between;align-items:center;color:#9bafb9;font-size:13px}header a:hover,footer a:hover{color:white}h1{font-size:clamp(48px,9vw,100px);font-weight:400;letter-spacing:-.065em;margin:36px 0 14px}p{color:#9bafb9;line-height:1.7}.intro{margin-bottom:48px}.project{display:block;border:1px solid #b2cddd20;border-radius:16px;overflow:hidden;background:#10212c;transition:border-color .2s}.project:hover{border-color:#b2cddd80}.project img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 55%}.caption{padding:25px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}.caption h2{margin:0 0 8px;font-size:25px;font-weight:500;letter-spacing:-.035em}.caption p{margin:0;font-size:13px}.arrow{font-size:28px;color:#a8c7d8}footer{font-size:12px;color:#8299a5;padding-bottom:50px}a:focus-visible{outline:2px solid #b7dcee;outline-offset:5px}@media(max-width:600px){header,main,footer{padding:24px}.intro{margin-bottom:30px}.caption{padding:20px}.caption h2{font-size:22px}}
+    body.lang-en .zh-only,body.lang-zh .en-only{display:none}header nav{display:flex;gap:20px;align-items:center}.lang-toggle{display:flex;gap:4px}.lang-toggle button{font:inherit;color:#91aab8;border:0;background:transparent;cursor:pointer;padding:5px 7px}.lang-toggle button[aria-pressed=true]{color:#e3ebee;border-bottom:1px solid #a8c7d8}
   </style>
 </head>
-<body>
-  <header><a href="https://jizhang.io/">Ji Zhang</a><a href="https://jizhang.io/articles/?lang=en">Articles ↗</a></header>
+<body class="lang-en">
+  <header><a href="https://jizhang.io/">Ji Zhang</a><nav><a data-follow-language href="https://jizhang.io/articles/?lang=en"><span class="en-only">Articles ↗</span><span class="zh-only">文章 ↗</span></a><div class="lang-toggle"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中</button></div></nav></header>
   <main>
-    <div class="intro"><h1>Labs</h1><p>Interactive experiments. Ideas you can take apart.</p></div>
-    <a class="project" href="/gas-turbine/">
+    <div class="intro"><h1>Labs</h1><p><span class="en-only">Interactive experiments. Ideas you can take apart.</span><span class="zh-only">交互实验。把想法拆开来看。</span></p></div>
+    <a class="project" data-follow-language href="/gas-turbine/">
       <img src="/gas-turbine-preview.png" width="1200" height="630" style="height:auto" alt="Interactive gas turbine cutaway">
-      <div class="caption"><div><h2>Gas turbine</h2><p>Open the machine. Separate its parts. Look inside a cooled blade.</p></div><span class="arrow" aria-hidden="true">↗</span></div>
+      <div class="caption"><div><h2><span class="en-only">Gas turbine</span><span class="zh-only">燃气轮机</span></h2><p><span class="en-only">Open the machine. Separate its parts. Look inside a cooled blade.</span><span class="zh-only">打开机壳，展开组件，再进入冷却叶片的内部。</span></p></div><span class="arrow" aria-hidden="true">↗</span></div>
     </a>
   </main>
-  <footer><a href="https://github.com/AlexZhangji/turbine-explorer">Source code · MIT ↗</a></footer>
+  <footer><a href="https://github.com/AlexZhangji/turbine-explorer"><span class="en-only">Source code · MIT ↗</span><span class="zh-only">开源代码 · MIT ↗</span></a></footer>
+  <script>
+  (function(){
+    function apply(lang){
+      lang=lang==='zh'?'zh':'en';document.body.className='lang-'+lang;document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+      document.querySelectorAll('button[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+      document.querySelectorAll('a[data-follow-language]').forEach(a=>{const u=new URL(a.href);u.searchParams.set('lang',lang);a.href=u.href;});
+      const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u);
+      try{localStorage.setItem('turbine-language',lang)}catch(e){}
+    }
+    let stored='en';try{stored=localStorage.getItem('turbine-language')||'en'}catch(e){}
+    apply(new URLSearchParams(location.search).get('lang')||stored);
+    document.querySelectorAll('button[data-lang]').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.lang)));
+  })();
+  </script>
 </body>
 </html>

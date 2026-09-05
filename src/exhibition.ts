@@ -1,4 +1,4 @@
-import { t, onLanguage } from './i18n';
+import { t, onLanguage, getLanguage } from './i18n';
 import './exhibition.css';
 import { energyKWh, householdDays, RATED_POWER_MW } from './energy';
 import { getRenderQuality, setRenderQuality, type RenderQuality } from './render-quality';
@@ -45,6 +45,15 @@ export function installExhibition(api: ExhibitAPI) {
   credit.className = 'quality-note';
   credit.textContent = '独立原理展示，非 GE 官方产品。';
   settings.querySelector('.exhibit-settings-panel')!.append(credit);
+  const articleLink = document.createElement('a');
+  articleLink.className = 'quality-note';
+  articleLink.style.cssText = 'display:block;color:inherit;margin-top:12px';
+  const refreshArticleLink = () => {
+    articleLink.textContent = t('阅读项目文章 ↗');
+    articleLink.href = `https://jizhang.io/articles/gas-turbine/?lang=${getLanguage()}`;
+  };
+  onLanguage(refreshArticleLink); refreshArticleLink();
+  settings.querySelector('.exhibit-settings-panel')!.append(articleLink);
   dock.append(run,layer.querySelector('.exhibit-primary')!,settings);
   const volumeLabel=document.createElement('label');volumeLabel.className='exhibit-volume';
   volumeLabel.innerHTML='<span>声音音量</span><output data-volume-value>25%</output><input data-exhibit-volume type="range" min="0" max="100" step="1" value="25" aria-label="声音音量">';

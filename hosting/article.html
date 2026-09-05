@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A gas turbine you can take apart | Ji Zhang</title>
+<meta name="author" content="Ji Zhang">
+<meta name="description" content="An interactive gas turbine built in Three.js: open the casing, separate its assemblies, and explore a cooled blade.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ji Zhang">
+<meta property="og:title" content="A gas turbine you can take apart">
+<meta property="og:description" content="Open the casing, separate the assemblies, and look inside a cooled turbine blade. An interactive experiment by Ji Zhang.">
+<meta property="og:url" content="https://jizhang.io/articles/gas-turbine/">
+<meta property="og:image" content="https://jizhang.io/articles/gas-turbine/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A gas turbine you can take apart | Ji Zhang">
+<meta name="twitter:description" content="A composable Three.js machine, from the whole assembly to the inside of a cooled blade.">
+<meta name="twitter:image" content="https://jizhang.io/articles/gas-turbine/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://jizhang.io/articles/gas-turbine/?lang=en">
+<link rel="alternate" hreflang="zh-CN" href="https://jizhang.io/articles/gas-turbine/?lang=zh">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Source+Serif+4:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;padding:32px 24px 80px;background:#fdfdfb;color:#101216;font:18px/1.85 'Source Serif 4','Noto Serif SC',serif}.shell{max-width:960px;margin:auto;background:#fff;border:1px solid #101216;padding:46px 60px}a{color:inherit;text-decoration-thickness:1px;text-underline-offset:4px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #101216;padding-bottom:15px;font:11px 'Geist Mono',monospace;letter-spacing:.12em}.topbar a{text-decoration:none}.toggle{display:flex;border:1px solid #101216}.toggle button{border:0;background:none;padding:7px 11px;cursor:pointer;font:inherit}.toggle button[aria-pressed=true]{background:#101216;color:white}.date{font:11px 'Geist Mono',monospace;color:#777e83;margin:40px 0 16px;letter-spacing:.12em}h1{font:500 clamp(32px,5vw,48px)/1.22 Cinzel,'Noto Serif SC',serif;letter-spacing:.015em;margin:0 0 22px}h2{font-size:25px;line-height:1.45;font-weight:500;margin:42px 0 16px}p{margin:0 0 20px}.lede{font-size:21px;color:#4c5158}.hero{display:block;width:100%;height:auto;margin:30px 0 20px}.launch{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin:24px 0}.launch a{font:12px 'Geist Mono',monospace;letter-spacing:.025em}.primary{padding:13px 17px;background:#101216;color:white;text-decoration:none}.notice{font-size:13px;line-height:1.6;color:#697279;border-left:2px solid #b9893a;padding-left:14px}.steps{padding-left:23px}.steps li{padding-left:5px;margin:10px 0}.sources{font-size:14px;border-top:1px solid #e4e6dd;padding-top:20px}.sources a{display:block;margin:8px 0}footer{border-top:1px solid #101216;margin-top:38px;padding-top:18px;display:flex;justify-content:space-between;gap:18px;font:11px 'Geist Mono',monospace}body.lang-en .zh-only,body.lang-zh .en-only{display:none}body.lang-zh h1{font-family:'Noto Serif SC',serif}a:focus-visible,button:focus-visible{outline:2px solid #a32820;outline-offset:4px}@media(max-width:650px){body{padding:12px;font-size:17px}.shell{padding:24px 22px}.topbar{font-size:10px}.lede{font-size:19px}.date{margin-top:30px}}
+</style>
+</head>
+<body class="lang-en"><article class="shell">
+<nav class="topbar"><a data-follow-language href="/articles/?lang=en">JIZHANG.IO / ARTICLES</a><div class="toggle"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中</button></div></nav>
+<div class="date">2026 · 09 · 05 / LABS</div>
+<h1><span class="en-only">A gas turbine you can take apart</span><span class="zh-only">把燃气轮机拆开来看</span></h1>
+<p class="lede"><span class="en-only">A machine becomes more interesting when you can see how its parts fit together, then pull one out and look closer.</span><span class="zh-only">一台机器最有意思的地方，不只是外观，而是看清部件如何组成整体，再把其中一个取出来，凑近看。</span></p>
+<img class="hero" src="./og.png" width="1200" height="630" alt="Gas turbine cutaway, built in Three.js">
+<div class="launch"><a class="primary" data-follow-language href="https://labs.jizhang.io/gas-turbine/?lang=en"><span class="en-only">Explore the gas turbine ↗</span><span class="zh-only">打开交互模型 ↗</span></a><a href="https://github.com/AlexZhangji/turbine-explorer">GitHub · MIT ↗</a></div>
+<p><span class="en-only">That is what I wanted to build here: not just a turbine-shaped object, but a machine you can take apart. The casing opens, the assemblies separate, and selected parts can be inspected on their own. The model is written in Three.js, with geometry generated in code.</span><span class="zh-only">我想做的不是一个长得像燃气轮机的物体，而是一台可以拆开看的机器：打开机壳，让组件展开，再进入少数值得仔细看的部件。模型用 Three.js 实现，几何结构由代码生成。</span></p>
+<h2><span class="en-only">Start with the whole machine</span><span class="zh-only">先看整体，再看零件</span></h2>
+<ol class="steps">
+<li><span class="en-only">Begin with the cutaway. Drag to orbit and scroll to move closer.</span><span class="zh-only">从剖面开始，拖动旋转，滚轮拉近，先看清整机的内部布局。</span></li>
+<li><span class="en-only">Switch to the exploded view. Look at how the casing, shaft and blade rows belong to the same assembly.</span><span class="zh-only">切到爆炸图，看机壳、主轴和叶片级如何组成同一台机器。</span></li>
+<li><span class="en-only">Start the airflow and rotation illustration. Motion makes the distinction between rotating and stationary parts easier to see. Sound is optional.</span><span class="zh-only">开启气流和转动示意，观察哪些零件在转、哪些固定不动。声音可以单独开关。</span></li>
+<li><span class="en-only">Enter the cooled-blade study. Cooling passages and coating layers are visible from the start.</span><span class="zh-only">进入冷却叶片检视。内部冷却流道和涂层分解默认展开，不用先翻一堆菜单。</span></li>
+</ol>
+<h2><span class="en-only">The blade is the close-up</span><span class="zh-only">值得拉近看的，是那枚叶片</span></h2>
+<p><span class="en-only">The interesting part is how materials and cooling work together. A representative thermal-barrier system combines a nickel-based superalloy substrate, a metallic bond coat, a protective oxide and a ceramic top coat. Internal air cooling and surface film cooling help control metal temperature. This is not a water pipe inside the blade, and hot gas temperature is not the same as the temperature of the metal.</span><span class="zh-only">它有意思的地方，在于材料与冷却如何共同工作。一套典型的热障体系包括镍基高温合金基体、金属粘结层、保护性氧化层和陶瓷面层，再结合内部空气冷却与表面气膜冷却，控制金属温度。不是在叶片里接一根水管；燃气温度也不等于叶片金属本身的温度。</span></p>
+<p><span class="en-only">The close-up illustrates those principles. It does not claim to reproduce GE's undisclosed alloy recipe or passage layout. Layer spacing is exaggerated so you can see the stack; the neutral finishes are illustrative rather than measured material colors.</span><span class="zh-only">这个特写展示的是这些原理，不冒充 GE 未公开的合金配方或内部流道。涂层间距被放大，是为了看清分层；中性的表面质感也是视觉示意，不是实物颜色测量。</span></p>
+<h2><span class="en-only">A model you can read, too</span><span class="zh-only">也可以拆开代码看</span></h2>
+<p><span class="en-only">The assembly, inspection tools, lighting and synthesized audio are in the MIT-licensed repository. This is an independent visualization based on public references, not manufacturer CAD, a CFD result or an operating guide.</span><span class="zh-only">整机装配、部件检视、灯光和合成音效都放在 MIT 开源仓库里。这是基于公开资料的独立可视化，不是制造 CAD、流体仿真结果或实际操作指南。</span></p>
+<div class="sources"><span class="en-only">Technical references</span><span class="zh-only">技术参考</span><a href="https://www.gevernova.com/gas-power/products/gas-turbines/9ha">GE Vernova · 9HA</a><a href="https://netl.doe.gov/sites/default/files/gas-turbine-handbook/4-4-2.pdf">DOE / NETL · Superalloy coatings</a><a href="https://www.nasa.gov/special-projects-laboratory-turbine-cooling/">NASA · Turbine cooling</a></div>
+<footer><a data-follow-language href="/articles/?lang=en"><span class="en-only">← All articles</span><span class="zh-only">← 返回文章列表</span></a><span>Ji Zhang</span></footer>
+</article>
+<script>
+(function(){
+  function setLang(lang){
+    lang=lang==='zh'?'zh':'en';
+    document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+    document.body.className='lang-'+lang;
+    document.title=lang==='zh'?'把燃气轮机拆开来看 | Ji Zhang':'A gas turbine you can take apart | Ji Zhang';
+    document.querySelectorAll('button[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+    document.querySelectorAll('a[data-follow-language]').forEach(a=>{const u=new URL(a.href);u.searchParams.set('lang',lang);a.href=u.href;});
+    const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u);
+    try{localStorage.setItem('jz-lang',lang)}catch(e){}
+  }
+  let saved='en';try{saved=localStorage.getItem('jz-lang')||'en'}catch(e){}
+  setLang(new URLSearchParams(location.search).get('lang')||saved);
+  document.querySelectorAll('button[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+})();
+</script>
+</body></html>

@@ -1,5 +1,6 @@
 // Source-language catalog. Values are authored English, never machine-translated at runtime.
 export const english: Record<string,string> = Object.fromEntries(`
+阅读项目文章 ↗|Read the project article ↗
 独立原理展示，非 GE 官方产品。|Independent concept study. Not an official GE product.
 冷却叶片|Cooled blade
 材料分层|Material layers
