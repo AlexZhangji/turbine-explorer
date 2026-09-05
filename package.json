@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "build:labs": "tsc && vite build --base=/gas-turbine/ --outDir dist-labs/gas-turbine && node scripts/package-labs.mjs",
     "test:energy": "node --experimental-strip-types scripts/verify-energy.mjs",
     "test:language": "node --experimental-strip-types scripts/verify-language.mjs",
     "test:blade": "node --experimental-strip-types scripts/verify-blade.mjs",

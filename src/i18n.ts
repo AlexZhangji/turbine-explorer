@@ -47,7 +47,7 @@ export function setLanguage(next: Language) {
   try { localStorage.setItem('turbine-language',next); } catch { /* Keep in-memory setting. */ }
   const url = new URL(location.href); url.searchParams.set('lang',next); history.replaceState(null,'',url);
   document.documentElement.lang = next === 'zh' ? 'zh-CN' : 'en';
-  document.title = next === 'zh' ? 'Turbine Explorer | 燃气轮机原理展示' : 'Turbine Explorer | Interactive 9HA.02 Study';
+  document.title = next === 'zh' ? '燃气轮机 | Ji Zhang Labs' : 'Gas turbine | Ji Zhang Labs';
   translateNode(document.body);
   document.querySelectorAll<HTMLButtonElement>('[data-language]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === next)));
   listeners.forEach(listener => listener()); observe();

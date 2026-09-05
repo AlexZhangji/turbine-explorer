@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://labs.jizhang.io/sitemap.xml

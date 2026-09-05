@@ -54,10 +54,16 @@ The output is a static `dist/` directory. No backend, server-side GPU, API key o
 
 ## Deploy
 
-Deploy `dist/` to any static host. For Cloudflare Pages Git integration, select this repository,
-use build command `npm run build`, output directory `dist`, and Node.js 22.18 or newer.
+Deploy `dist/` to any static host for a standalone installation.
+For Ji Zhang Labs, run `npm run build:labs`: this produces `dist-labs/` with a Labs index
+and the application at `/gas-turbine/`. For Cloudflare Pages Git integration, select this repository,
+use build command `npm test && npm run build:labs`, output directory `dist-labs`, and Node.js 22.18 or newer.
 Attach your chosen subdomain in the project's Custom domains settings before creating its DNS record.
 Never put Cloudflare credentials in source files or frontend environment variables.
+
+The Labs publishing target is `https://labs.jizhang.io/gas-turbine/`. Update canonical URLs,
+Open Graph / Twitter metadata and `hosting/sitemap.xml` when deploying to another domain.
+Social-preview tags are in the initial HTML so crawlers do not need to execute WebGL or JavaScript.
 
 ## Sources and licensing
 

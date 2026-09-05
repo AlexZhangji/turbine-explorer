@@ -169,9 +169,9 @@ let hdrEnvironmentTexture: THREE.Texture | null = null;
 if (useCardEnvironment) {
   pmrem.dispose();
 } else {
-  const hdrUrl = environmentMode === 'contrast'
-    ? '/environment/studio_kontrast_02_1k.hdr'
-    : '/environment/poly_haven_studio_1k.hdr';
+  const hdrUrl = new URL(environmentMode === 'contrast'
+    ? './environment/studio_kontrast_02_1k.hdr'
+    : './environment/poly_haven_studio_1k.hdr', document.baseURI).href;
   new RGBELoader()
     .setDataType(THREE.HalfFloatType)
     .load(
