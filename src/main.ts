@@ -17,6 +17,7 @@ import { createOperatingEffects } from './operating-effects';
 import './style.css';
 import './typography.css';
 import { renderPixelRatio, onRenderQuality, getRenderQuality, setRenderQuality, type RenderQuality } from './render-quality';
+import { createBackdrop, appendBackdropControl } from './backdrop';
 
 const canvas = document.querySelector<HTMLCanvasElement>('#scene');
 if (!canvas) throw new Error('Canvas not found');
@@ -62,6 +63,8 @@ renderer.toneMappingExposure = 1.1;
 
 const scene = new THREE.Scene();
 scene.background = null;
+const backdrop = createBackdrop(scene);
+backdrop.resize(surfaceWidth(), surfaceHeight());
 const sceneFog = new THREE.FogExp2(0x071018, .0105);
 scene.fog = sceneFog;
 
@@ -299,6 +302,7 @@ const syncSurfaceLayout = () => {
   composer.setPixelRatio(renderer.getPixelRatio());
   renderer.setSize(width, height);
   composer.setSize(width, height);
+  backdrop.resize(width, height);
   canvas.style.position = 'absolute';
   canvas.style.left = '0';
   canvas.style.width = '100%';
@@ -797,7 +801,7 @@ const setCleanView = (enabled: boolean) => {
   updateCameraFraming();
   cleanButton?.classList.toggle('active', enabled);
   const fogBackground = new THREE.Color(enabled ? 0xffffff : 0x071018);
-  scene.background = null;
+  backdrop.restore();
   scene.environment = enabled ? cleanCardEnvironment : (hdrEnvironmentTexture ?? cleanCardEnvironment);
   scene.environmentRotation.set(.02, enabled || !hdrEnvironmentTexture ? -.28 : environmentRotationY, 0);
   scene.environmentIntensity = enabled ? 1.06 : .9;
@@ -1187,6 +1191,7 @@ globalQuality.querySelector('select')!.onchange = event => setRenderQuality((eve
 globalQuality.addEventListener('toggle', refreshQualityPanel);
 document.addEventListener('pointerdown', event => { if (!globalQuality.contains(event.target as Node)) globalQuality.open = false; });
 onRenderQuality(refreshQualityPanel); refreshQualityPanel();
+appendBackdropControl(globalQuality);
 if(pageParams.get('experience')==='exhibition'||(!pageParams.has('experience')&&!pageParams.has('inspect')&&!pageParams.has('compare')&&!pageParams.has('render')&&!captureSize))exhibition.enter(Number(pageParams.get('chapter')??1));
 if (pageParams.get('inspect') === 'blade') componentInspector.open(true);
 function animate() {

@@ -1,6 +1,12 @@
 // Source-language catalog. Values are authored English, never machine-translated at runtime.
 export const english: Record<string,string> = Object.fromEntries(`
 画质|Quality
+背景|Background
+深蓝蓝图|Navy blueprint
+浅色蓝图|Paper blueprint
+白底蓝线|White blueprint
+白色摄影棚|White studio
+深灰摄影棚|Graphite studio
 陶瓷热障层|Ceramic thermal barrier
 热生长氧化层|Thermally grown oxide
 金属粘结层|Metallic bond coat

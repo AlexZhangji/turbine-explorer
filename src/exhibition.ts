@@ -2,6 +2,7 @@ import { t, onLanguage, getLanguage } from './i18n';
 import './exhibition.css';
 import { energyKWh, householdDays, RATED_POWER_MW } from './energy';
 import { getRenderQuality, setRenderQuality, onRenderQuality, type RenderQuality } from './render-quality';
+import { appendBackdropControl } from './backdrop';
 
 type ExhibitAPI = {
   volume: () => number;
@@ -41,6 +42,7 @@ export function installExhibition(api: ExhibitAPI) {
   const settings = document.createElement('details'); settings.className='exhibit-settings';
   settings.innerHTML='<summary aria-label="展示设置" title="展示设置">⋯</summary><div class="exhibit-settings-panel"><label class="quality-label"><span>渲染画质</span><select data-quality><option value="balanced">流畅</option><option value="high">精细 · 2×</option><option value="ultra">演示 · 最高 3×</option></select></label><p class="quality-note">提高渲染清晰度，不改变几何细节。高画质更耗显存，最长边上限 4096 像素。</p></div>';
   settings.querySelector('.exhibit-settings-panel')!.prepend(layer.querySelector('.exhibit-transport')!);
+  appendBackdropControl(settings.querySelector<HTMLElement>('.exhibit-settings-panel')!);
   const credit = document.createElement('p');
   credit.className = 'quality-note';
   credit.textContent = '独立原理展示，非 GE 官方产品。';

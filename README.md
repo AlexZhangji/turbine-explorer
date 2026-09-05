@@ -5,7 +5,7 @@ Open the casing, separate the assemblies, and look inside a cooled turbine blade
 
 [Open the interactive model](https://labs.jizhang.io/gas-turbine/?lang=en) · [中文](https://labs.jizhang.io/gas-turbine/?lang=zh)
 
-[![Exploded assembly with interactive view and airflow controls](docs/exploded.png)](https://labs.jizhang.io/gas-turbine/?lang=en&chapter=2&service=major&quality=high)
+[![Exploded assembly with interactive view and airflow controls](docs/exploded.png)](https://labs.jizhang.io/gas-turbine/?lang=en&chapter=2&service=major&quality=high&background=white)
 
 Separate the casing and assemblies. Drag to orbit, scroll to zoom, then inspect a component.
 
@@ -21,6 +21,7 @@ Both images are screenshots of the running model, not manufacturer renders.
 - A cooled blade with internal passages, cooling-flow animation and a representative coating stack.
 - Rotor motion, airflow, combustion cues and quiet, opt-in synthesized sound.
 - English and Chinese, adjustable render quality and household-energy equivalents with visible assumptions.
+- Live backgrounds: navy blueprint, white paper with blue drafting lines, white studio and graphite studio.
 
 This is an independent educational visualization inspired by public GE Vernova 9HA references.
 It is not affiliated with or endorsed by GE Vernova, not manufacturer CAD, not CFD,
@@ -43,6 +44,9 @@ and every component view. Balanced, Fine and Showcase share one saved setting, w
 render resolution shown in pixels. Desktop starts in Fine; small screens start in Balanced.
 Use `?quality=ultra` for a presentation link. Supersampling sharpens the same geometry;
 the longest render edge is capped at 4096 pixels to bound GPU memory use.
+Choose **Quality → Background** to change the backdrop without changing the metal materials,
+camera or render quality. The setting is shared with component close-ups and saved locally.
+Deep links accept `background=blueprint`, `paper`, `white` or `graphite`.
 
 ```sh
 npm test

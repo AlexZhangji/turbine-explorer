@@ -1,0 +1,30 @@
+/* Blueprint marks must never be composited over the machine. */
+html body #app.exhibition-mode::before,
+html body #app.exhibition-mode::after{content:none}
+html[data-backdrop-tone=light] body .exhibition{color:#233943}
+html[data-backdrop-tone=light] body .exhibition .exhibit-header b{color:#1b2c35}
+html[data-backdrop-tone=light] body .exhibition .exhibit-eyebrow{color:#496879}
+html[data-backdrop-tone=light] body .exhibition .exhibit-copy h1{color:#526b78!important}
+html[data-backdrop-tone=light] body :is(.lab-quality,.language-control button){color:#3e5968}
+html[data-backdrop-tone=light] body .language-control{background:#ffffff80;border-color:#29445125}
+html[data-backdrop-tone=light] body .language-control button[aria-pressed=true]{background:#2b465218;color:#182e3b}
+html[data-backdrop-tone=light] body .exhibition .exhibit-footer{background:#f7fafad9;border-color:#3d5b6a30;box-shadow:0 8px 35px #20313c12,inset 0 1px #fff}
+html[data-backdrop-tone=light] body .exhibition .exhibit-footer :is(nav button,.exhibit-primary,.exhibit-settings>summary){color:#4a6270}
+html[data-backdrop-tone=light] body .exhibition .exhibit-footer nav button[aria-current=page]{color:#172e3d;background:#324e6112}
+html[data-backdrop-tone=light] body .exhibition .exhibit-footer .exhibit-run{background:#213e50;color:#f3f8fa}
+html[data-backdrop-tone=light] body .exhibition .energy-result{color:#876124}
+html[data-backdrop-tone=light] body .exhibition .energy-result b{color:#926017}
+html[data-backdrop-tone=light] body .exhibition :is(.energy-clock,.energy-clock b){color:#49616d}
+html[data-backdrop-tone=light] body .parts-lab.blade-hero :is(.lab-blade-title h1,.lab-blade-summary,.lab-layer-list button){color:#304754}
+html[data-backdrop-tone=light] body .parts-lab.blade-hero :is(.lab-blade-title span,.lab-blade-summary p,.lab-layer-list small){color:#546d78}
+html[data-backdrop-tone=light] body .parts-lab.blade-hero .lab-blade-summary{border-color:#435f7233}
+html[data-backdrop-tone=light] body .parts-lab .lab-layer-list button{--layer-accent:#386681!important}
+html[data-backdrop-tone=light] body .parts-lab .lab-layer-list [data-layer="3"]{--layer-accent:#8a611d!important}
+html[data-backdrop-tone=light] body .parts-lab .lab-layer-list [data-layer="2"]{--layer-accent:#237967!important}
+html[data-backdrop-tone=light] body .parts-lab .lab-layer-list [data-layer="1"]{--layer-accent:#62548d!important}
+html[data-backdrop-tone=light] body .parts-lab.blade-hero :is(.lab-header-actions>button,.lab-summary-heading,.lab-cooling-note,.lab-camera button){color:#41616e}
+html[data-backdrop-tone=light] body .lab-quality[open]{background:#f6f9faf7;border-color:#3b596a30;color:#314d5d;box-shadow:0 10px 35px #14232e16}
+html[data-backdrop-tone=light] body .lab-quality select{background:#fff;color:#213d4d;border-color:#38596b40}
+html[data-backdrop-tone=light] body .lab-quality :is(output,small){color:#536d7b}
+.exhibit-settings-panel .backdrop-control{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:12px;color:#b1c1ca;gap:12px}
+.exhibit-settings-panel .backdrop-control select{font:inherit;background:#202e39;color:#dce7ed;border:1px solid #a8c0cc30;border-radius:7px;padding:7px;max-width:170px}

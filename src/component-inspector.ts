@@ -10,6 +10,7 @@ import { createBladeStudy, type BladeView } from './blade-study';
 import './inspector.css';
 import { languageControl } from './i18n';
 import { renderPixelRatio, onRenderQuality, getRenderQuality, setRenderQuality, type RenderQuality } from './render-quality';
+import { createBackdrop, appendBackdropControl } from './backdrop';
 
 type Part = { id: string; name: string; family: string; note: string; source: THREE.Object3D; instance?: number };
 
@@ -59,6 +60,7 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
   dialog.querySelector('.lab-header-actions')!.prepend(qualityControl);
   const qualitySelect = qualityControl.querySelector('select')!;
   qualitySelect.value = getRenderQuality(); qualitySelect.onchange = () => setRenderQuality(qualitySelect.value as RenderQuality);
+  appendBackdropControl(qualityControl);
   const el = <T extends HTMLElement = HTMLElement>(selector: string) => dialog.querySelector<T>(selector)!;
   const viewPort = el('.lab-viewport');
   const bladeTitle = document.createElement('div'); bladeTitle.className = 'lab-blade-title';
@@ -80,6 +82,7 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
   let renderer: THREE.WebGLRenderer | undefined;
   let composer: EffectComposer, ao: SSAOPass;
   const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0c1820);
+  const backdrop = createBackdrop(scene);
   const camera = new THREE.PerspectiveCamera(34, 1, .02, 180);
   let orbit: OrbitControls;
   let context: THREE.Group | undefined, selected: THREE.Object3D | undefined;
@@ -131,9 +134,7 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
     const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.fromScene(studio, .025).texture;
     scene.environmentIntensity = .85;
     studio.traverse(o => { if (o instanceof THREE.Mesh) { o.geometry.dispose(); (o.material as THREE.Material).dispose(); } }); pmrem.dispose();
-    const backdrop = new Uint8Array(256 * 256 * 4);
-    for (let y = 0; y < 256; y++) for (let x = 0; x < 256; x++) { const v = Math.max(0,1-Math.hypot((x-132)/160,(y-116)/155)); const i = (y*256+x)*4; backdrop[i]=9+v*17; backdrop[i+1]=17+v*23; backdrop[i+2]=24+v*28; backdrop[i+3]=255; }
-    const background = new THREE.DataTexture(backdrop,256,256); background.colorSpace=THREE.SRGBColorSpace; background.magFilter=THREE.LinearFilter; background.needsUpdate=true; scene.background=background;
+    backdrop.resize(viewPort.clientWidth, viewPort.clientHeight);
     const key = new THREE.DirectionalLight(0xf2f2ed, 1.65); key.position.set(-3, 6, 4); key.castShadow = true;
     key.shadow.mapSize.set(2048, 2048); key.shadow.camera.left=-5; key.shadow.camera.right=5; key.shadow.camera.top=6; key.shadow.camera.bottom=-3; key.shadow.bias=-.0002; key.shadow.normalBias=.012; key.shadow.radius=3;
     const softbox = new THREE.RectAreaLight(0xf0f0ee, 2.8, 3, 6); softbox.position.set(-4, 3, 4); softbox.lookAt(0,2,0);
@@ -196,6 +197,7 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
     renderer.setPixelRatio(ratio); composer.setPixelRatio(renderer.getPixelRatio());
     const previousFit = Math.max(1, .92 / camera.aspect);
     renderer.setSize(width, height, false); composer.setSize(width, height); camera.aspect = width / height; camera.updateProjectionMatrix();
+    backdrop.resize(width, height);
     qualityControl.querySelector('output')!.textContent = `${renderer.domElement.width} × ${renderer.domElement.height} px`;
     if (mode === 'blade' && orbit) camera.position.sub(orbit.target).multiplyScalar(Math.max(1, .92 / camera.aspect) / previousFit).add(orbit.target);
   }
