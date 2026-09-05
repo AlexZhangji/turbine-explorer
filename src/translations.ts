@@ -1,5 +1,10 @@
 // Source-language catalog. Values are authored English, never machine-translated at runtime.
 export const english: Record<string,string> = Object.fromEntries(`
+画质|Quality
+陶瓷热障层|Ceramic thermal barrier
+热生长氧化层|Thermally grown oxide
+金属粘结层|Metallic bond coat
+镍基高温合金|Nickel-based superalloy
 阅读项目文章 ↗|Read the project article ↗
 独立原理展示，非 GE 官方产品。|Independent concept study. Not an official GE product.
 冷却叶片|Cooled blade

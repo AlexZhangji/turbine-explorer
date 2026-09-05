@@ -1,7 +1,7 @@
 import { t, onLanguage, getLanguage } from './i18n';
 import './exhibition.css';
 import { energyKWh, householdDays, RATED_POWER_MW } from './energy';
-import { getRenderQuality, setRenderQuality, type RenderQuality } from './render-quality';
+import { getRenderQuality, setRenderQuality, onRenderQuality, type RenderQuality } from './render-quality';
 
 type ExhibitAPI = {
   volume: () => number;
@@ -64,6 +64,7 @@ export function installExhibition(api: ExhibitAPI) {
   settings.addEventListener('toggle',()=>{if(settings.open)refreshVolume();});
   const quality=settings.querySelector<HTMLSelectElement>('[data-quality]')!;
   quality.value=getRenderQuality();quality.onchange=()=>setRenderQuality(quality.value as RenderQuality);
+  onRenderQuality(() => { quality.value = getRenderQuality(); });
   const sequenceButton=document.createElement('button');sequenceButton.className='sequence-control';sequenceButton.type='button';sequenceButton.dataset.sequence='';
   sequenceButton.innerHTML='<span>播放演示</span><small>剖面 → 展开 → 环绕 → 气流 → 冷却叶片</small>';
   settings.querySelector('.exhibit-settings-panel')!.prepend(sequenceButton);

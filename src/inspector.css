@@ -122,6 +122,28 @@ body .parts-lab.blade-hero .lab-blade-summary{display:block;position:absolute;le
 .lab-cooling-note{display:flex;align-items:center;gap:8px;color:#94bdc3;font-size:11px;margin:0 0 14px}
 .lab-cooling-note i{width:5px;height:5px;border-radius:50%;background:#80b8c3}
 .lab-blade-summary>small{font-size:9px;color:#667a80;line-height:1.6}
+/* Color belongs to the annotation, not to a fabricated material finish. */
+.lab-layer-list{display:grid;gap:4px;margin:0 0 18px;pointer-events:auto}
+body .parts-lab .lab-layer-list button{--layer-accent:#9bbfda;display:grid;grid-template-columns:68px 1fr;gap:3px 12px;align-items:baseline;width:100%;min-height:48px;padding:9px 8px;border:1px solid transparent;border-radius:6px;background:transparent;text-align:left;transition:background .18s,border-color .18s}
+.lab-layer-list [data-layer="3"]{--layer-accent:#e9c88e!important}
+.lab-layer-list [data-layer="2"]{--layer-accent:#89cabb!important}
+.lab-layer-list [data-layer="1"]{--layer-accent:#aeb8e9!important}
+body .parts-lab .lab-layer-list b{font-size:14px;font-weight:500;color:var(--layer-accent);letter-spacing:-.02em}
+body .parts-lab .lab-layer-list button>span{font-size:11px;line-height:1.5;text-align:right;color:var(--layer-accent);opacity:.86}
+body .parts-lab .lab-layer-list small{grid-column:1/-1;font-size:10px;color:#a8b5bc;line-height:1.4;opacity:0;transition:opacity .18s}
+body .parts-lab .lab-layer-list button:is(:hover,:focus-visible,.is-highlighted,[aria-pressed=true]){background:#d5e8ef08;border-color:var(--layer-accent)}
+body .parts-lab .lab-layer-list button:is(:hover,:focus-visible,.is-highlighted,[aria-pressed=true]) small{opacity:1}
+.lab-quality{position:relative;z-index:20;pointer-events:auto;font:11px/1.5 Manrope,sans-serif;color:#aebdc4}
+.lab-quality summary{list-style:none;cursor:pointer;padding:7px 0}.lab-quality summary::-webkit-details-marker{display:none}
+.lab-quality[open]{background:#101b22f5;border:1px solid #a8c0cc35;border-radius:10px;padding:12px;width:235px}
+.lab-quality label{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:12px 0}
+.lab-quality select{background:#182831;color:#e3edef;border:1px solid #a8c0cc40;border-radius:5px;font:inherit;padding:5px;max-width:145px}
+.lab-quality output{display:block;font-variant-numeric:tabular-nums;color:#c6d9e6;margin:10px 0}
+.lab-quality small{display:block;font-size:10px;line-height:1.7;color:#8c9faa}
+.global-quality{position:fixed;right:132px;top:29px;z-index:111}
+body:has(.parts-lab[open])>.global-quality{display:none}
+@media(max-width:700px){.global-quality{right:118px;top:24px}.lab-quality[open]{width:210px}}
+@media(prefers-reduced-motion:reduce){.lab-layer-list button,.lab-layer-list small{transition:none!important}}
 @media(max-width:1100px){body .parts-lab.blade-hero .lab-camera{bottom:90px;left:50%;transform:translateX(-50%)}}
 @media(max-width:700px){
  body .parts-lab.blade-hero .lab-header{right:14px;top:12px;left:14px}
@@ -135,6 +157,11 @@ body .parts-lab.blade-hero .lab-blade-summary{display:block;position:absolute;le
  .lab-blade-summary .lab-material-key dt{font-size:12px;margin-bottom:4px}
  .lab-blade-summary .lab-material-key dd{text-align:left;font-size:9px;line-height:1.3}
  .lab-blade-summary .lab-cooling-note{display:inline-flex;margin:0 8px 0 0;font-size:9px}
+ .lab-blade-summary .lab-layer-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin-bottom:8px}
+ body .parts-lab .lab-blade-summary .lab-layer-list button{display:block;min-height:62px;padding:5px}
+ body .parts-lab .lab-blade-summary .lab-layer-list b{font-size:12px;display:block;margin-bottom:3px}
+ body .parts-lab .lab-blade-summary .lab-layer-list button>span{display:block;font-size:9px;text-align:left}
+ body .parts-lab .lab-blade-summary .lab-layer-list small{display:none}
  .lab-blade-summary>small{font-size:8px}
  body .parts-lab.blade-hero .lab-blade-dock{bottom:14px;width:calc(100% - 28px);box-sizing:border-box;justify-content:center;gap:8px 16px;flex-wrap:wrap;padding:8px 10px}
  body .parts-lab.blade-hero .lab-view-tabs{width:100%;justify-content:center;gap:22px}

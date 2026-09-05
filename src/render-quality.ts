@@ -1,6 +1,9 @@
 export type RenderQuality = 'balanced' | 'high' | 'ultra';
 const requested = new URLSearchParams(location.search).get('quality');
-let quality: RenderQuality = requested === 'high' || requested === 'ultra' ? requested : 'balanced';
+const valid = (value: string | null): value is RenderQuality => ['balanced', 'high', 'ultra'].includes(value ?? '');
+let saved: string | null = null;
+try { saved = localStorage.getItem('turbine-quality'); } catch { /* Storage is optional. */ }
+let quality: RenderQuality = valid(requested) ? requested : valid(saved) ? saved : matchMedia('(max-width: 700px)').matches ? 'balanced' : 'high';
 const listeners = new Set<() => void>();
 export const getRenderQuality = () => quality;
 // High presets supersample even on a 1x display. Bound the longest GPU surface.
@@ -10,6 +13,7 @@ export function renderPixelRatio(width: number, height: number) {
 }
 export function setRenderQuality(next: RenderQuality) {
   quality = next;
+  try { localStorage.setItem('turbine-quality', next); } catch { /* Keep the URL setting. */ }
   const url = new URL(location.href); url.searchParams.set('quality', next); history.replaceState(null, '', url);
   listeners.forEach(listener => listener());
 }

@@ -16,7 +16,7 @@ import { RATED_POWER_MW, energyKWh } from './energy';
 import { createOperatingEffects } from './operating-effects';
 import './style.css';
 import './typography.css';
-import { renderPixelRatio, onRenderQuality } from './render-quality';
+import { renderPixelRatio, onRenderQuality, getRenderQuality, setRenderQuality, type RenderQuality } from './render-quality';
 
 const canvas = document.querySelector<HTMLCanvasElement>('#scene');
 if (!canvas) throw new Error('Canvas not found');
@@ -1175,6 +1175,18 @@ const exhibition = installExhibition({
   },
 });
 installLanguage();
+// The same quality setting controls the machine, exploded view and every inspector.
+const globalQuality = document.createElement('details'); globalQuality.className = 'lab-quality global-quality';
+globalQuality.innerHTML = '<summary>画质</summary><label><span>渲染画质</span><select aria-label="渲染画质"><option value="balanced">流畅</option><option value="high">精细 · 2×</option><option value="ultra">演示 · 最高 3×</option></select></label><output></output><small>提高渲染清晰度，不改变几何细节。高画质更耗显存，最长边上限 4096 像素。</small>';
+document.body.append(globalQuality);
+function refreshQualityPanel() {
+  globalQuality.querySelector('select')!.value = getRenderQuality();
+  globalQuality.querySelector('output')!.textContent = `${renderer.domElement.width} × ${renderer.domElement.height} px`;
+}
+globalQuality.querySelector('select')!.onchange = event => setRenderQuality((event.target as HTMLSelectElement).value as RenderQuality);
+globalQuality.addEventListener('toggle', refreshQualityPanel);
+document.addEventListener('pointerdown', event => { if (!globalQuality.contains(event.target as Node)) globalQuality.open = false; });
+onRenderQuality(refreshQualityPanel); refreshQualityPanel();
 if(pageParams.get('experience')==='exhibition'||(!pageParams.has('experience')&&!pageParams.has('inspect')&&!pageParams.has('compare')&&!pageParams.has('render')&&!captureSize))exhibition.enter(Number(pageParams.get('chapter')??1));
 if (pageParams.get('inspect') === 'blade') componentInspector.open(true);
 function animate() {

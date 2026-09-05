@@ -3,7 +3,16 @@
 A composable gas turbine study, built with procedural Three.js geometry.
 Open the casing, separate the assemblies, and look inside a cooled turbine blade.
 
-![Turbine Explorer cutaway](docs/preview.png)
+[Open the interactive model](https://labs.jizhang.io/gas-turbine/?lang=en) · [中文](https://labs.jizhang.io/gas-turbine/?lang=zh)
+
+[![Exploded assembly with interactive view and airflow controls](docs/exploded.png)](https://labs.jizhang.io/gas-turbine/?lang=en&chapter=2&service=major&quality=high)
+
+Separate the casing and assemblies. Drag to orbit, scroll to zoom, then inspect a component.
+
+[![Cooled blade with selectable coating layers and internal cooling flow](docs/cooled-blade.png)](https://labs.jizhang.io/gas-turbine/?lang=en&inspect=blade&quality=high)
+
+Go inside a cooled blade. Hover or focus a material label to highlight its layer; click to keep it selected.
+Both images are screenshots of the running model, not manufacturer renders.
 
 ## Explore
 
@@ -29,7 +38,11 @@ npm run dev
 
 The home page opens the English cutaway exhibition. Drag to orbit, scroll to zoom,
 choose the exploded view to separate assemblies, and open the cooled-blade study.
-Sound starts only after a user gesture. Quality can be changed in the settings menu.
+Sound starts only after a user gesture. The compact **Quality** panel is available on the machine
+and every component view. Balanced, Fine and Showcase share one saved setting, with the current
+render resolution shown in pixels. Desktop starts in Fine; small screens start in Balanced.
+Use `?quality=ultra` for a presentation link. Supersampling sharpens the same geometry;
+the longest render edge is capped at 4096 pixels to bound GPU memory use.
 
 ```sh
 npm test

@@ -242,16 +242,34 @@ export function createBladeStudy() {
   // Representative Ni-superalloy / MCrAlY / alumina / YSZ system, not a
   // verified 9HA.02 coating recipe. Separation and oxide thickness are exaggerated.
   const coatingNames = ['nickel-superalloy-substrate', 'MCrAlY-bond-coat', 'alumina-TGO', 'YSZ-ceramic-topcoat'];
+  const layerAccents = [0x9bbfda, 0xaeb8e9, 0x89cabb, 0xe9c88e];
+  const layerRest: THREE.Vector3[] = [];
+  const layerEdges: THREE.LineSegments[] = [];
   for (const [i, mat] of [nickel, bond, oxide, ceramic].entries()) {
     const g = new THREE.BoxGeometry(.70, .96, i === 0 ? .07 : i === 2 ? .012 : .024, 20, 16, 1);
     const p = g.getAttribute('position');
     for (let k = 0; k < p.count; k++) p.setZ(k, p.getZ(k) + .22 * (1 - (p.getX(k) / .45) ** 2) + p.getY(k) * .10);
     g.computeVertexNormals();
-    const mesh = new THREE.Mesh(g, mat); mesh.name = coatingNames[i];
-    mesh.position.set(1.25 + i * .34, 2.08 + i * .12, .22 + i * .23); layers.add(mesh);
+    // Coupon materials are independent: selection must not tint the actual blade.
+    const mesh = new THREE.Mesh(g, mat.clone()); mesh.name = coatingNames[i]; mesh.userData.layerIndex = i;
+    mesh.position.set(1.12 + i * .46, 2.08 + i * .12, .22 + i * .23); layers.add(mesh);
+    layerRest.push(mesh.position.clone());
+    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(g, 32), new THREE.LineBasicMaterial({ color: layerAccents[i], transparent: true, opacity: .85, depthWrite: false }));
+    edge.visible = false; mesh.add(edge); layerEdges.push(edge);
+  }
+  let highlightedLayer: number | null = null;
+  function highlightLayer(index: number | null) {
+    highlightedLayer = index !== null && index >= 0 && index < 4 ? index : null;
+    root.userData.highlightedLayer = highlightedLayer;
+    layers.children.forEach((object, i) => {
+      const mat = (object as THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>).material;
+      mat.emissive.setHex(layerAccents[i]); mat.emissiveIntensity = i === highlightedLayer ? .10 : 0;
+      layerEdges[i].visible = i === highlightedLayer;
+    });
   }
   let view: BladeView = 'layers', flowEnabled = true;
   const setView = (next: BladeView) => {
+    highlightLayer(null);
     view = next; layers.visible = view === 'layers'; airflow.visible = flowEnabled && view !== 'surface';
     front.visible = view === 'surface'; sectionFrame.visible = view !== 'surface';
     root.userData.view = view;
@@ -261,7 +279,12 @@ export function createBladeStudy() {
   airflow.traverse(object => { object.castShadow = false; object.receiveShadow = false; });
   root.rotation.set(-.06, -.12, -.13);
   root.userData.sculptRuntime = { exactness: 'explanatory', parts: ['fir-tree-root', 'platform', 'pressure-side-teaching-section', 'suction-side-wall', 'internal-cooling', 'magnified-coating-coupon'] };
-  return { root, setView, setFlow(enabled: boolean) { flowEnabled = enabled; setView(view); }, update(_delta: number, elapsed: number) {
+  return { root, setView, highlightLayer, layerMeshes: layers.children as THREE.Mesh[], setFlow(enabled: boolean) { flowEnabled = enabled; airflow.visible = flowEnabled && view !== 'surface'; }, update(_delta: number, elapsed: number) {
+    layers.children.forEach((object, i) => {
+      const amount = i === highlightedLayer ? .16 : 0;
+      object.position.x = THREE.MathUtils.damp(object.position.x, layerRest[i].x + amount, 12, _delta);
+      object.position.z = THREE.MathUtils.damp(object.position.z, layerRest[i].z + amount, 12, _delta);
+    });
     if (!airflow.visible) return;
     for (let i = 0; i < 18 * 8; i++) { const point = curves[0].getPointAt((elapsed * .10 + Math.floor(i / 8) / 18 - i % 8 * .0018 + 1) % 1); particlePositions.set([point.x, point.y, point.z], i * 3); }
     filmCurves.forEach((curve, j) => { for (let k = 0; k < 8; k++) { const point = curve.getPointAt((elapsed * .48 + j * .113 - k * .012 + 1) % 1); particlePositions.set([point.x, point.y, point.z], (18 * 8 + j * 8 + k) * 3); } });

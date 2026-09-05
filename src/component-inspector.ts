@@ -9,7 +9,7 @@ import type { TurbineModel } from './turbine';
 import { createBladeStudy, type BladeView } from './blade-study';
 import './inspector.css';
 import { languageControl } from './i18n';
-import { renderPixelRatio, onRenderQuality } from './render-quality';
+import { renderPixelRatio, onRenderQuality, getRenderQuality, setRenderQuality, type RenderQuality } from './render-quality';
 
 type Part = { id: string; name: string; family: string; note: string; source: THREE.Object3D; instance?: number };
 
@@ -54,6 +54,11 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
   });
   dialog.querySelector('.lab-part-list')!.append(secondary);
   dialog.querySelector('.lab-header-actions')!.prepend(languageControl());
+  const qualityControl = document.createElement('details'); qualityControl.className = 'lab-quality';
+  qualityControl.innerHTML = '<summary>画质</summary><label><span>渲染画质</span><select aria-label="渲染画质"><option value="balanced">流畅</option><option value="high">精细 · 2×</option><option value="ultra">演示 · 最高 3×</option></select></label><output></output><small>提高渲染清晰度，不改变几何细节。高画质更耗显存，最长边上限 4096 像素。</small>';
+  dialog.querySelector('.lab-header-actions')!.prepend(qualityControl);
+  const qualitySelect = qualityControl.querySelector('select')!;
+  qualitySelect.value = getRenderQuality(); qualitySelect.onchange = () => setRenderQuality(qualitySelect.value as RenderQuality);
   const el = <T extends HTMLElement = HTMLElement>(selector: string) => dialog.querySelector<T>(selector)!;
   const viewPort = el('.lab-viewport');
   const bladeTitle = document.createElement('div'); bladeTitle.className = 'lab-blade-title';
@@ -87,6 +92,26 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
   let blade: ReturnType<typeof createBladeStudy>;
   let ownedMaterials: THREE.Material[] = [];
   let flowEnabled = true;
+  let pinnedLayer: number | null = null;
+  function showLayer(index: number | null) {
+    blade?.highlightLayer(index);
+    dialog.querySelectorAll<HTMLButtonElement>('[data-layer]').forEach(button => {
+      button.classList.toggle('is-highlighted', Number(button.dataset.layer) === index);
+      button.setAttribute('aria-pressed', String(Number(button.dataset.layer) === pinnedLayer));
+    });
+  }
+  const layerRay = new THREE.Raycaster(), layerPointer = new THREE.Vector2();
+  const inspectionCanvas = el<HTMLCanvasElement>('canvas');
+  inspectionCanvas.addEventListener('pointermove', event => {
+    if (mode !== 'blade' || currentBladeView !== 'layers' || event.buttons) return;
+    const rect = inspectionCanvas.getBoundingClientRect();
+    layerPointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
+    layerRay.setFromCamera(layerPointer, camera);
+    const hit = layerRay.intersectObjects(blade.layerMeshes, false)[0];
+    showLayer(hit ? hit.object.userData.layerIndex as number : pinnedLayer);
+    inspectionCanvas.style.cursor = hit ? 'pointer' : '';
+  });
+  inspectionCanvas.addEventListener('pointerleave', () => { if (mode === 'blade') showLayer(pinnedLayer); inspectionCanvas.style.cursor = ''; });
 
   function initialize() {
     if (renderer) return;
@@ -161,15 +186,17 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
       : side === 'front' ? new THREE.Vector3(0, .03, 1) : side === 'back' ? new THREE.Vector3(-.45, .1, -1) : new THREE.Vector3(.48, .22, 1);
     camera.position.copy(center).addScaledVector(direction.normalize(), dist); orbit.update();
   }
-  let lastWidth=0,lastHeight=0;
+  let lastWidth=0,lastHeight=0,lastRatio=0;
   function resize() {
     if (!renderer || !dialog.open) return;
     const { width, height } = viewPort.getBoundingClientRect();
-    if(width===lastWidth&&height===lastHeight)return;
-    lastWidth=width;lastHeight=height;
-    renderer.setPixelRatio(renderPixelRatio(width,height)); composer.setPixelRatio(renderer.getPixelRatio());
+    const ratio = renderPixelRatio(width,height);
+    if(width===lastWidth&&height===lastHeight&&ratio===lastRatio)return;
+    lastWidth=width;lastHeight=height;lastRatio=ratio;
+    renderer.setPixelRatio(ratio); composer.setPixelRatio(renderer.getPixelRatio());
     const previousFit = Math.max(1, .92 / camera.aspect);
     renderer.setSize(width, height, false); composer.setSize(width, height); camera.aspect = width / height; camera.updateProjectionMatrix();
+    qualityControl.querySelector('output')!.textContent = `${renderer.domElement.width} × ${renderer.domElement.height} px`;
     if (mode === 'blade' && orbit) camera.position.sub(orbit.target).multiplyScalar(Math.max(1, .92 / camera.aspect) / previousFit).add(orbit.target);
   }
   function updateCopy() {
@@ -243,12 +270,21 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
     const glance = {
       surface: '<p class="lab-one-line">陶瓷隔热，合金承力。</p>',
       cooling: '<p class="lab-one-line">空气穿过内部通道，从气膜孔排出。</p>',
-      layers: '<dl class="lab-material-key"><div><dt>YSZ</dt><dd>隔热</dd></div><div><dt>Al₂O₃</dt><dd>氧化保护</dd></div><div><dt>MCrAlY</dt><dd>粘结与抗氧化</dd></div><div><dt>Ni</dt><dd>承力基体</dd></div></dl>',
+      layers: '<div class="lab-layer-list"><button data-layer="3" aria-pressed="false"><b>YSZ</b><span>隔热</span><small>陶瓷热障层</small></button><button data-layer="2" aria-pressed="false"><b>Al₂O₃</b><span>氧化保护</span><small>热生长氧化层</small></button><button data-layer="1" aria-pressed="false"><b>MCrAlY</b><span>粘结与抗氧化</span><small>金属粘结层</small></button><button data-layer="0" aria-pressed="false"><b>Ni</b><span>承力基体</span><small>镍基高温合金</small></button></div>',
     };
     el('.lab-science').innerHTML = `${glance[view]}<details class="lab-technical"><summary>材料与原理</summary>${science[view]}</details>`;
     bladeSummary.innerHTML = `<span class="lab-summary-heading">${view === 'layers' ? '材料分层' : view === 'cooling' ? '内部冷却' : '表面与基体'}</span>${glance[view]}${view === 'layers' ? '<p class="lab-cooling-note"><i></i><span>内部空气冷却</span></p><small>典型体系 · 分层厚度已放大</small>' : ''}`;
+    pinnedLayer = null; showLayer(null);
+    dialog.querySelectorAll<HTMLButtonElement>('[data-layer]').forEach(button => {
+      const index = Number(button.dataset.layer);
+      button.addEventListener('pointerenter', () => showLayer(index));
+      button.addEventListener('pointerleave', () => showLayer(pinnedLayer));
+      button.addEventListener('focus', () => showLayer(index));
+      button.addEventListener('blur', () => showLayer(pinnedLayer));
+      button.addEventListener('click', () => { pinnedLayer = pinnedLayer === index ? null : index; showLayer(pinnedLayer); });
+    });
     resize();
-    camera.position.set(view === 'layers' ? 3.6 : 3.1, 3.05, view === 'layers' ? 10.3 : 9.0); orbit.target.set(view === 'layers' ? .9 : .25, 1.8, .1);
+    camera.position.set(view === 'layers' ? 1.8 : 3.1, 3.05, view === 'layers' ? 10.3 : 9.0); orbit.target.set(view === 'layers' ? .9 : .25, 1.8, .1);
     camera.position.sub(orbit.target).multiplyScalar(Math.max(1, .92 / camera.aspect)).add(orbit.target); orbit.update();
   }
   function openBlade() {
@@ -308,7 +344,7 @@ export function installComponentInspector(model: TurbineModel, onActive: (active
   }));
   dialog.querySelectorAll<HTMLButtonElement>('[data-blade-view]').forEach(button => button.addEventListener('click', () => bladeView(button.dataset.bladeView as BladeView)));
   dialog.querySelectorAll<HTMLButtonElement>('[data-camera]').forEach(button => button.addEventListener('click', () => frame(mode === 'blade' ? blade.root : mode === 'assembly' ? context! : selected!, button.dataset.camera)));
-  onRenderQuality(resize);
+  onRenderQuality(() => { qualitySelect.value = getRenderQuality(); resize(); });
   const observer = new ResizeObserver(resize); observer.observe(viewPort);
   return { get active() { return dialog.open; }, open, openPart(id: string) { const part=parts.find(p=>p.id===id);if(part)open(false,part); }, render(delta: number) {
     if (!dialog.open || !renderer) return;

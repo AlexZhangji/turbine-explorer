@@ -7,13 +7,14 @@
     "build:labs": "tsc && vite build --base=/gas-turbine/ --outDir dist-labs/gas-turbine && node scripts/package-labs.mjs",
     "test:energy": "node --experimental-strip-types scripts/verify-energy.mjs",
     "test:language": "node --experimental-strip-types scripts/verify-language.mjs",
+    "test:quality": "node --experimental-strip-types scripts/verify-quality.mjs",
     "test:blade": "node --experimental-strip-types scripts/verify-blade.mjs",
     "test:service": "node --experimental-strip-types scripts/verify-service.mjs",
     "test:geometry": "node --experimental-strip-types scripts/verify-case.mjs && node --experimental-strip-types scripts/verify-assembly.mjs",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "npm run test:energy && npm run test:language && npm run test:blade && npm run test:service && npm run test:geometry"
+    "test": "npm run test:quality && npm run test:energy && npm run test:language && npm run test:blade && npm run test:service && npm run test:geometry"
   },
   "dependencies": {
     "three": "^0.179.1"
