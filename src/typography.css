@@ -1,0 +1,60 @@
+@font-face{font-family:Manrope;src:url('/fonts/Manrope-Variable.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('/fonts/SpaceGrotesk-Variable.ttf') format('truetype');font-style:normal;font-weight:300 700;font-display:swap}
+body .exhibition,body .parts-lab{font-family:Manrope,'PingFang SC','Microsoft YaHei',sans-serif;font-feature-settings:'ss01' on;-webkit-font-smoothing:antialiased}
+body .exhibition button,body .parts-lab button,body .language-control button,body .exhibition select{font-family:Manrope,'PingFang SC','Microsoft YaHei',sans-serif;letter-spacing:-.015em}
+body .exhibition .exhibit-header b{font-family:'Space Grotesk',sans-serif;font-size:23px;letter-spacing:-.045em;font-weight:500;line-height:1.2}
+body .exhibition .exhibit-eyebrow{font-family:Manrope,sans-serif;font-size:9px;letter-spacing:.22em;font-weight:500;color:#8296a2}
+body .exhibition .exhibit-copy h1,html[lang=en] body .exhibition .exhibit-copy h1{font-family:Manrope,'Microsoft YaHei',sans-serif!important;font-weight:400!important;letter-spacing:.035em;font-size:11px!important;color:#97a9b4}
+body .exhibition .exhibit-footer nav button b{font-weight:500;font-size:11px;letter-spacing:0}
+body .exhibition .exhibit-footer :is(.exhibit-run,.exhibit-primary){font-weight:500;font-size:11px!important}
+body .exhibition .energy-result b{font-family:'Space Grotesk',sans-serif}
+body .parts-lab .lab-header h1,body .parts-lab .lab-details h2{font-family:'Space Grotesk','Microsoft YaHei',sans-serif;font-weight:400;letter-spacing:-.04em}
+body .parts-lab .lab-header h1{font-size:25px}
+body .parts-lab .lab-details h2{font-size:27px;line-height:1.15}
+body .parts-lab .lab-kicker{font-family:Manrope,sans-serif;font-size:9px;letter-spacing:.16em;color:#8cabb9}
+body .parts-lab :is(.lab-description,.lab-science p,.lab-science li){font-size:12px;line-height:1.85;font-weight:400;color:#a8bdc9}
+body .parts-lab button{border-color:#bcd8e31c;border-radius:8px;background:#bcd8e306;font-size:11px}
+body .parts-lab button[aria-pressed=true]{border-color:#c8e3ea35;background:#c8e3ea10}
+body .parts-lab .lab-header{background:#0c171e;border-bottom-color:#bcd8e31c}
+body .parts-lab .lab-details{background:#101c24;border-left-color:#bcd8e31c}
+body .parts-lab .lab-footer{background:#0c171e;border-top-color:#bcd8e31c;letter-spacing:.01em}
+body.blade-approach .exhibition{opacity:0;transition:opacity .35s;pointer-events:none}
+body.blade-approach .exhibition .exhibit-hotspot{opacity:0!important;pointer-events:none!important}
+body.blade-approach .global-language{opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){body.blade-approach .exhibition{transition:none}}
+.blade-locator{position:fixed;z-index:90;left:50%;bottom:95px;transform:translateX(-50%);padding:9px 15px;border:1px solid #e1c78b33;border-radius:20px;background:#151c23cc;color:#e6d1a5;font:12px Manrope,'Microsoft YaHei',sans-serif;pointer-events:none}
+.blade-locator[hidden]{display:none}
+.sequence-control{width:100%;text-align:left;padding:10px 12px;border:1px solid #bed4e22b;border-radius:8px;background:#cadfeb0b;color:#dce8f0;margin:0 0 12px}
+.sequence-control small{display:block;font-size:9px;color:#8b9fab;line-height:1.7;margin-top:4px}
+/* Manufacturer and model, not a generic page-category heading. */
+body .exhibition .exhibit-header>div{display:flex;flex-direction:column-reverse;gap:10px}
+body .exhibition .exhibit-header b{font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:400;letter-spacing:-.065em;margin:0;line-height:1.05;color:#f0f2ee}
+body .exhibition .exhibit-eyebrow{font-size:11px;letter-spacing:.22em;color:#a1adb2}
+body .exhibition .exhibit-copy,html[lang=en] body .exhibition .exhibit-copy{top:133px}
+/* Low-contrast factory floor and broad raking light keep the model dominant. */
+body #app.exhibition-mode{isolation:isolate;background:radial-gradient(ellipse at 67% 34%,#3a444a5c 0%,transparent 51%),linear-gradient(115deg,#090f14 6%,#1b252d 49%,#111a22 70%,#090f14 100%)}
+#app.exhibition-mode::before{content:'';position:absolute;pointer-events:none;z-index:0;left:-40%;width:180%;height:54%;bottom:-24%;transform:perspective(650px) rotateX(57deg);transform-origin:center top;background:repeating-linear-gradient(90deg,transparent 0 139px,#9caeb310 140px 141px),repeating-linear-gradient(0deg,transparent 0 89px,#9caeb30e 90px 91px);mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 68%)}
+#app.exhibition-mode::after{content:'';position:absolute;pointer-events:none;z-index:0;left:15%;right:8%;top:22%;height:1px;background:linear-gradient(90deg,transparent,#a8c4ce0d,transparent);box-shadow:0 1px 80px 35px #c1d4dc03;transform:rotate(-12deg)}
+#app.exhibition-mode>#scene{z-index:1}
+body .exhibition.has-energy .exhibit-energy{opacity:1;visibility:visible}
+body .exhibition .energy-result{color:#d4b995;font-size:11px}
+body .exhibition .energy-result b{color:#f2cf92;font-size:20px;font-weight:500}
+body .exhibition .energy-clock{color:#96a9b2}
+body .exhibition .energy-clock b{font-size:17px;color:#d8e2e6;font-weight:400}
+.energy-clock i{font-style:normal;color:#869394;margin:0 10px}
+body .exhibition .energy-windows i{background:#ddbb83}
+@media(max-width:900px){body .exhibition .exhibit-header b{font-size:31px}body .exhibition .exhibit-copy,html[lang=en] body .exhibition .exhibit-copy{top:120px}}
+@media(max-width:560px){body .exhibition .energy-result{font-size:9px}body .exhibition .energy-result b{font-size:15px}.energy-clock{display:block;margin-bottom:5px}.energy-clock i{margin:0 5px}body .exhibition .exhibit-energy{max-width:calc(100% - 44px)}}
+/* Blueprint sheet: the metal stays photographic; only its stage is drafted. */
+body .exhibition .exhibit-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:24px;letter-spacing:.045em;color:#a9c5d5;font-weight:400}
+body .exhibition .exhibit-header>div{gap:8px}
+body .exhibition .exhibit-copy,html[lang=en] body .exhibition .exhibit-copy{top:143px}
+body #app.exhibition-mode{background:radial-gradient(ellipse at 54% 43%,#203d51 0%,#102638 52%,#081624 100%)}
+#app.exhibition-mode::before{left:0;right:0;top:0;bottom:0;width:auto;height:auto;transform:none;background:linear-gradient(#8bc6e10a 1px,transparent 1px),linear-gradient(90deg,#8bc6e10a 1px,transparent 1px),linear-gradient(#8bc6e112 1px,transparent 1px),linear-gradient(90deg,#8bc6e112 1px,transparent 1px);background-size:40px 40px,40px 40px,200px 200px,200px 200px;mask-image:radial-gradient(ellipse at 50% 48%,#000 18%,#000b 72%,transparent 100%)}
+#app.exhibition-mode::after{left:24px;right:24px;top:183px;bottom:108px;height:auto;transform:none;box-shadow:none;opacity:.5;background:linear-gradient(#89bdd1,#89bdd1) left top/22px 1px no-repeat,linear-gradient(#89bdd1,#89bdd1) left top/1px 22px no-repeat,linear-gradient(#89bdd1,#89bdd1) right top/22px 1px no-repeat,linear-gradient(#89bdd1,#89bdd1) right top/1px 22px no-repeat,linear-gradient(#89bdd1,#89bdd1) left bottom/22px 1px no-repeat,linear-gradient(#89bdd1,#89bdd1) left bottom/1px 22px no-repeat,linear-gradient(#89bdd1,#89bdd1) right bottom/22px 1px no-repeat,linear-gradient(#89bdd1,#89bdd1) right bottom/1px 22px no-repeat}
+@media(max-width:900px){body .exhibition .exhibit-eyebrow{font-size:21px}body .exhibition .exhibit-copy,html[lang=en] body .exhibition .exhibit-copy{top:132px}}
+@media(max-width:560px){#app.exhibition-mode::after{left:15px;right:15px;top:170px;bottom:155px}#app.exhibition-mode::before{background-size:30px 30px,30px 30px,150px 150px,150px 150px}}
+/* Place the energy trace in the sheet margin, clear of the lower casing. */
+body .exhibition .exhibit-energy,body .exhibition.is-operating .exhibit-energy{top:138px;bottom:auto;left:auto;right:36px}
+body .exhibition .energy-assumptions{top:36px;bottom:auto;left:auto;right:0}
+@media(max-width:900px){body .exhibition .exhibit-energy,body .exhibition.is-operating .exhibit-energy{top:170px;right:22px;left:22px;bottom:auto}}

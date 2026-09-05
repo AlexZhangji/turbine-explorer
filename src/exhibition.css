@@ -1,0 +1,133 @@
+.language-control{display:flex;gap:2px;padding:3px;background:#0c1a23;border:1px solid #52606955;border-radius:6px;align-items:center}
+/* Optional recording/showcase layout: the object owns the center of the stage. */
+@media(min-width:1000px){
+  .film-presentation .exhibition{background:none}
+  .film-presentation .exhibition .exhibit-copy{left:4vw;top:108px;width:92vw}
+  .film-presentation .exhibition .exhibit-copy h1{font:400 24px/1.3 system-ui;margin:0;color:#a8bcc5}
+  .film-presentation .exhibit-copy p,.film-presentation .exhibit-counter{display:none}
+  .film-presentation .exhibit-copy .exhibit-run{position:fixed;bottom:42px;right:4vw;margin:0;padding:12px 18px}
+  .film-presentation .exhibit-copy .exhibit-primary{position:fixed;bottom:95px;right:4vw}
+  .film-presentation .exhibit-footer{right:360px;gap:28px}
+  .film-presentation .exhibit-footer nav{max-width:440px}
+  .film-presentation .exhibit-energy{bottom:135px}
+  .film-presentation .exhibit-energy-chain{bottom:105px}
+}
+.parts-lab *{scrollbar-width:thin;scrollbar-color:#445b65 #0c1820}.lab-part-list button{min-width:0;overflow-wrap:anywhere}.lab-library{min-width:0}.lab-header-actions{align-items:center}
+.exhibit-leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.exhibit-leaders line{stroke:#b9b79c;stroke-width:1;opacity:.38}
+.language-control button{color:#8b9fa8;background:none;border:0;border-radius:3px;padding:7px 10px;font:12px/1.3 system-ui;cursor:pointer}
+.language-control button[aria-pressed=true]{background:#d6ddd8;color:#102027}.global-language{position:fixed;right:24px;top:14px;z-index:110}
+body:has(.parts-lab[open])>.global-language{display:none}.lab-header-actions .language-control button{padding:7px 10px;font-size:12px}
+.top-actions{padding-top:30px}.exhibition[hidden]{display:none}.exhibition{position:absolute;inset:0;z-index:30;pointer-events:none;color:#e2e7e5;font-family:"Microsoft YaHei",system-ui,sans-serif;background:linear-gradient(90deg,#071018c9 0%,#07101855 22%,transparent 48%)}
+.exhibition button{pointer-events:auto;cursor:pointer;font:inherit}.exhibit-header{position:absolute;top:32px;left:4vw;right:155px;display:flex;justify-content:space-between;align-items:center}.exhibit-header b{display:block;font-size:15px;letter-spacing:.16em;margin-top:10px}.exhibit-eyebrow{color:#99aaa8;font-size:10px;letter-spacing:.20em}
+.exhibit-header>button{border:0;background:none;color:#9fb0b6;font-size:11px}.exhibit-copy{position:absolute;left:4vw;top:24%;width:310px}.exhibit-counter{color:#c5ae83;font:11px/1.2 monospace;letter-spacing:.3em;margin-bottom:25px}.exhibit-copy h1{font-size:clamp(30px,3.2vw,52px);font-weight:400;line-height:1.3;letter-spacing:-.025em;white-space:pre-line;margin:0 0 25px;text-wrap:balance}.exhibit-copy p{font-size:13px;line-height:1.9;color:#91a5ad;max-width:275px;margin:0 0 30px}.exhibit-primary{background:#d9e1db;border:0;border-radius:3px;padding:14px 20px;color:#14222b;font-size:12px!important;box-shadow:0 8px 30px #0003}.exhibit-primary:hover{background:#f2ede0}.exhibit-primary:focus-visible,.exhibit-hotspot:focus-visible{outline:2px solid #d9b97e;outline-offset:5px}
+.exhibit-footer{position:absolute;bottom:30px;left:4vw;right:4vw;display:flex;gap:36px;align-items:end}.exhibit-footer nav{display:flex;flex:1;max-width:660px}.exhibit-footer nav button{position:relative;flex:1;text-align:left;background:transparent;color:#68808b;border:0;border-top:1px solid #6d828838;padding:17px 12px 0 0}.exhibit-footer nav button span{font:10px monospace;margin-right:14px;color:#829193}.exhibit-footer nav button b{font-size:12px;font-weight:400}.exhibit-footer nav button[aria-current=step]{color:#e9e3d6}.exhibit-footer nav i{position:absolute;top:-1px;left:0;width:100%;height:1px;background:#c1a97e;transform:scaleX(0);transform-origin:left}.exhibit-transport{width:260px}.exhibit-tour{color:#d6c49f;background:transparent;border:0;padding:0 0 10px;font-size:11px!important}.exhibit-note{display:block;font-size:10px;line-height:1.65;color:#6f8995}
+.exhibit-hotspot{position:absolute;transform:translate(-50%,-50%);color:#d6e3e4;background:#0b1a22dc;border:1px solid #68869366;border-radius:22px;padding:8px 13px;font-size:11px!important;white-space:nowrap;backdrop-filter:blur(12px)}.exhibit-hotspot:before{content:"";display:inline-block;width:5px;height:5px;background:#d4bd91;border-radius:50%;margin-right:9px}.exhibit-hotspot:hover{background:#294553;border-color:#d4bd91}
+#app.exhibition-mode{background:radial-gradient(ellipse at 65% 45%,#25313a 0%,#0d1821 48%,#060e14 100%)}#app.exhibition-mode>:not(#scene):not(.exhibition):not(.loading){display:none!important}
+html[lang=en] .exhibit-copy h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(35px,3.5vw,56px)}html[lang=en] .exhibit-copy{width:330px}html[lang=en] .lab-description{line-height:1.6}html[lang=en] .lab-header h1 span{letter-spacing:0}
+@media(max-width:800px){.exhibit-header{left:24px;top:25px}.exhibit-header>button{display:none}.exhibit-copy{left:24px;top:15%;width:240px}.exhibit-copy h1{font-size:30px}.exhibit-copy p{font-size:11px;max-width:210px}.exhibit-footer{left:24px;right:24px;bottom:20px;display:block}.exhibit-transport{margin-top:18px;width:auto}.exhibit-note{max-width:500px}.global-language{right:16px}.exhibit-footer nav button span{margin-right:5px}}
+@media(prefers-reduced-motion:reduce){.exhibit-copy{animation:none!important}}
+@media(max-width:800px){.exhibit-header>button{display:block;position:absolute;right:-128px;top:57px}.exhibit-copy,html[lang=en] .exhibit-copy{top:125px;width:calc(100% - 48px)}.exhibit-copy h1,html[lang=en] .exhibit-copy h1{font-size:32px;max-width:350px;line-height:1.2;margin-bottom:16px}.exhibit-counter{margin-bottom:14px}.exhibit-copy p{max-width:310px;line-height:1.7;margin-bottom:17px}.exhibit-primary{padding:11px 16px}.exhibit-eyebrow{font-size:9px;letter-spacing:.08em}}
+@media(max-width:540px){.exhibit-copy,html[lang=en] .exhibit-copy{top:113px}.exhibit-copy h1,html[lang=en] .exhibit-copy h1{font-size:27px;max-width:300px}.exhibit-copy p{font-size:11px;max-width:300px}.exhibit-hotspot{font-size:9px!important;padding:6px 9px}.exhibit-footer nav button b{font-size:10px}.exhibit-header{right:145px}.exhibit-header>button{right:-118px}.exhibit-footer{bottom:15px}}
+.loading.hide{visibility:hidden}
+.lab-secondary{margin-top:18px;border-top:1px solid #37505b;padding-top:14px}.lab-secondary summary{color:#92aab6;font-size:12px;cursor:pointer;margin-bottom:14px}
+.exhibit-run{display:block;padding:15px 20px;margin:0 0 13px;border:1px solid #f2c98f;border-radius:4px;background:#ead2a8;color:#17232b;font-size:13px!important;box-shadow:0 0 30px #edb96320}
+.exhibit-run[aria-pressed=true]{background:#402d1f;color:#ffe2b1;border-color:#c38b55}
+.exhibit-energy{position:absolute;right:4vw;top:145px;width:270px;padding:18px;background:#08151fe8;border:1px solid #75899740;pointer-events:auto;border-radius:6px;backdrop-filter:blur(12px)}
+.energy-heading{display:flex;justify-content:space-between;gap:10px;color:#a1b4be;font-size:11px}
+.energy-heading [data-energy-state]{color:#dab878}
+.energy-numbers{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:18px 0}
+.energy-numbers strong{display:block;font:400 27px/1.2 system-ui;font-variant-numeric:tabular-nums;letter-spacing:-.04em;color:#f1e1bf}
+.energy-numbers span{font-size:12px;margin-top:4px;color:#c5d4da}.energy-numbers small{display:block;font-size:10px;color:#90a4ae;line-height:1.6}
+.energy-power{font-size:11px;font-variant-numeric:tabular-nums;color:#bdd2db}
+.energy-equivalent{font-size:11px;color:#a7b9be;border-top:1px solid #41536166;margin-top:12px;padding-top:11px}
+.energy-equivalent b{color:#ead8b6;font-weight:500}.exhibit-energy details{margin-top:10px;color:#9fb4bd;font-size:11px}.exhibit-energy details p{font-size:11px;line-height:1.6}.exhibit-energy label{display:block;margin-top:10px}.exhibit-energy input{display:block;width:100%;accent-color:#d6b574;margin-top:9px}.exhibit-energy a{color:#9ccadd;font-size:10px}.energy-assumption{display:block;font-size:10px;color:#849ba5;margin-top:8px}
+.exhibit-energy-chain{position:absolute;bottom:160px;left:4vw;display:flex;gap:11px;align-items:center;font-size:11px;color:#93a8b1}.exhibit-energy-chain i{font-style:normal;color:#49616c}.is-operating .exhibit-energy-chain span:nth-of-type(1){color:#87deef}.is-operating .exhibit-energy-chain span:nth-of-type(2){color:#ffac67}.is-operating .exhibit-energy-chain span:nth-of-type(4),.is-operating .exhibit-energy-chain span:nth-of-type(5){color:#dce9b8}
+.exhibition.is-operating .exhibit-energy{border-color:#d0a26666}.exhibit-copy .exhibit-primary{background:transparent;color:#b7c9d0;border:1px solid #69828c55;padding:10px 15px}
+@media(max-width:1000px) and (min-width:801px){.exhibit-energy{top:130px;width:225px;padding:14px}.exhibit-copy,html[lang=en] .exhibit-copy{width:260px}.exhibit-energy-chain{bottom:180px}}
+@media(max-width:800px){.exhibit-energy{top:137px;right:24px;width:230px;padding:14px}.exhibit-copy p{max-width:280px!important}.energy-numbers strong{font-size:24px}.exhibit-energy-chain{left:24px;bottom:160px}.exhibit-copy,html[lang=en] .exhibit-copy{width:310px!important}.exhibit-copy h1{font-size:29px!important}.exhibit-blade-note{max-width:270px}.exhibit-run{font-size:12px!important;padding:12px 16px}}
+@media(max-width:650px){.exhibit-energy{top:auto;bottom:170px;left:24px;right:24px;width:auto;padding:12px}.energy-numbers{margin:8px 0;grid-template-columns:1fr 1fr}.energy-numbers>div{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}.energy-numbers small{flex-basis:100%}.energy-numbers strong{font-size:23px}.energy-equivalent{display:none}.exhibit-energy details{margin-top:6px}.energy-assumption{font-size:9px}.exhibit-energy-chain{bottom:145px;gap:8px;font-size:10px}.exhibit-copy p{display:none}.exhibit-copy h1{margin-bottom:13px!important}.exhibit-run{margin-bottom:8px}.exhibit-blade-note{display:none}}
+.exhibit-counter{letter-spacing:.13em;font-size:10px}
+.exhibit-blade-note{display:block;max-width:280px;margin-top:13px;color:#8c9eaa;font-size:10px;line-height:1.6}
+.exhibit-footer nav{max-width:560px;min-width:300px}
+.exhibit-footer nav button{padding:18px 14px 14px;border:1px solid #68808b38}
+.exhibit-footer nav button+button{border-left:0}
+.exhibit-footer nav button[aria-current=page]{background:#c1a97e16;color:#efe2c7;border-top-color:#c1a97e}
+.exhibit-footer nav button[aria-current=page] i{transform:scaleX(1)}
+.exhibit-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.exhibit-controls button{border:1px solid #536c7655;background:#101e27;color:#a5bac3;padding:8px 10px;border-radius:4px;font-size:11px}
+.exhibit-controls button[aria-pressed=true]{border-color:#bea77c;color:#efe0c1;background:#baa67b17}
+.exhibit-controls button:disabled{opacity:.45;cursor:wait}
+.exhibit-controls button:focus-visible{outline:2px solid #d9b97e;outline-offset:3px}
+.exhibit-transport{width:360px}
+.exhibit-audio-note{display:block;color:#778f9a;font-size:10px;line-height:1.65;margin-top:4px}
+html[lang=en] .exhibit-copy h1{font-family:system-ui,sans-serif;font-size:clamp(34px,3.3vw,50px);letter-spacing:-.045em}
+@media(max-width:800px){.exhibit-footer nav{min-width:0;max-width:none}.exhibit-footer nav button{text-align:center;padding:12px 8px}.exhibit-transport{width:auto;margin-top:12px}.exhibit-controls{margin-bottom:8px}.exhibit-note{display:none}.exhibit-controls button{font-size:10px}.exhibit-copy p{margin-bottom:17px}.exhibit-blade-note{margin-top:9px}}
+/* Energy reads as a quiet trace below the object, not an instrument HUD. */
+.exhibit-blade-note{display:none}
+.exhibit-energy,.exhibition.is-operating .exhibit-energy{top:auto;bottom:183px;left:4vw;right:auto;width:auto;max-width:calc(100% - 48px);padding:0;border:0;background:none;border-radius:0;backdrop-filter:none}
+.exhibit-energy .energy-detail{margin:0}.energy-detail>summary{display:flex;align-items:center;gap:15px;list-style:none;cursor:pointer}.energy-detail>summary::-webkit-details-marker{display:none}
+.energy-windows{display:flex;gap:5px;align-items:end}.energy-windows i{width:9px;height:17px;border:1px solid #b9b79377;border-radius:1px;background:linear-gradient(transparent 46%,#b9b79377 47%,#b9b79377 52%,transparent 53%);opacity:.45}
+.energy-windows i:nth-child(2n){height:23px}.is-operating .energy-windows i{background:linear-gradient(transparent 46%,#24323c 47%,#24323c 52%,transparent 53%),#d9cba5;opacity:.9;box-shadow:0 0 14px #d9cba52a}
+.energy-result{font-size:12px;color:#a7bcc5}.energy-result b{font:400 21px/1.3 system-ui;color:#e8dec6;font-variant-numeric:tabular-nums;margin:0 5px}.energy-expand{color:#c6b88f;font-size:12px}
+.energy-assumption{margin-top:6px;font-size:10px;color:#8096a0}.energy-assumptions{position:absolute;bottom:65px;left:0;width:290px;max-width:calc(100vw - 72px);padding:20px;background:#0d1c26;border:1px solid #4a616a;border-radius:5px;box-shadow:0 12px 40px #0006;z-index:4;font-size:12px}
+.energy-assumptions input{width:100%}.energy-assumptions p{line-height:1.6}.energy-detail[open]>summary{color:#f1dfb8}
+.exhibit-energy-chain{bottom:147px}
+@media(max-width:800px){.exhibit-energy{left:24px;bottom:190px}.exhibit-energy-chain{bottom:154px}.energy-result b{font-size:20px}.energy-result{font-size:11px}.energy-windows{gap:4px}.energy-assumption{font-size:9px}}
+@media(max-width:450px){.energy-detail>summary{gap:10px}.energy-windows i{width:6px}.energy-result b{font-size:18px;margin:0 2px}.energy-result{font-size:10px}}
+/* Minimal exhibition chrome. These rules also replace the earlier film layout. */
+body .exhibition{background:none;color:#dce5eb;font-family:Inter,system-ui,sans-serif}
+body .exhibition [hidden]{display:none!important}
+body #app.exhibition-mode{background:radial-gradient(ellipse at 52% 46%,#253039 0%,#101820 52%,#090e13 100%)}
+body .exhibition .exhibit-header{left:36px;top:28px;right:155px}
+body .exhibition .exhibit-header b{font-size:17px;font-weight:500;letter-spacing:.06em;color:#dce3e7}
+body .exhibition .exhibit-eyebrow{font-size:9px;letter-spacing:.18em;color:#8d9aa4}
+body .exhibition .exhibit-copy,html[lang=en] body .exhibition .exhibit-copy{left:36px;top:105px;width:auto}
+body .exhibition .exhibit-copy h1,html[lang=en] body .exhibition .exhibit-copy h1{font:400 13px/1.5 system-ui!important;margin:0;color:#8c9da8;letter-spacing:.01em}
+body .exhibition :is(.exhibit-copy p,.exhibit-counter,.exhibit-blade-note,.exhibit-energy-chain){display:none}
+body .exhibition .exhibit-footer{bottom:28px;left:50%;right:auto;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px;border:1px solid #d6e1ed20;border-radius:18px;background:linear-gradient(130deg,#26323bbb,#141e27d9);box-shadow:0 12px 45px #0005,inset 0 1px #ffffff08;backdrop-filter:blur(24px);white-space:nowrap;pointer-events:auto}
+body .exhibition .exhibit-footer nav{flex:none;min-width:0;max-width:none;display:flex;gap:2px;padding-right:10px;margin-right:3px;border-right:1px solid #a4b7c620}
+body .exhibition .exhibit-footer nav button{padding:11px 15px;color:#8f9fa9;background:none;border:0;border-radius:10px;white-space:nowrap}
+body .exhibition .exhibit-footer nav button b{font-size:12px;font-weight:400}
+body .exhibition .exhibit-footer nav button i{display:none}
+body .exhibition .exhibit-footer nav button[aria-current=page]{color:#eef3f5;background:#d9e6ee12;box-shadow:inset 0 1px #ffffff0a}
+body .exhibition .exhibit-footer nav button:hover{color:#fff;background:#d9e6ee0a}
+body .exhibition .exhibit-footer .exhibit-run{position:static;padding:11px 18px;border:1px solid #dde9f026;border-radius:11px;background:#dce7ed;color:#17222c;font-size:12px!important;margin:0;box-shadow:0 2px 12px #0002;white-space:nowrap}
+body .exhibition .exhibit-footer .exhibit-run:hover{background:#f5f8fa}
+body .exhibition .exhibit-footer .exhibit-run[aria-pressed=true]{background:#b8d7d51c;color:#c5e5e0;border-color:#b8d7d536}
+body .exhibition .exhibit-footer .exhibit-primary{position:static;padding:11px 14px;border:0;border-radius:10px;background:none;color:#bccbd4;font-size:12px!important;box-shadow:none;white-space:nowrap}
+body .exhibition .exhibit-footer .exhibit-primary:hover{background:#d9e6ee0a;color:#fff}
+.exhibit-settings{position:relative}
+.exhibit-settings>summary{list-style:none;width:36px;text-align:center;font-size:22px;color:#9daeb9;border-radius:10px;padding:4px 0;cursor:pointer}
+.exhibit-settings>summary::-webkit-details-marker{display:none}
+.exhibit-settings>summary:hover,.exhibit-settings[open]>summary{background:#d9e6ee12;color:#fff}
+.exhibit-settings-panel{position:absolute;right:0;bottom:58px;width:300px;padding:20px;border:1px solid #cadbea25;background:#17212bf5;box-shadow:0 18px 60px #0007;border-radius:16px;white-space:normal;backdrop-filter:blur(24px)}
+body .exhibition .exhibit-transport{width:auto;margin:0}
+body .exhibition .exhibit-controls button{border:1px solid #a8c0cc25;border-radius:8px;background:none;color:#a1b5c2;padding:8px 10px;font-size:11px}
+body .exhibition .exhibit-controls button[aria-pressed=true]{color:#e4edf2;background:#d9e6ee12}
+.quality-label{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;padding-top:18px;border-top:1px solid #a8c0cc20;color:#b1c1ca;font-size:12px}
+.quality-label select{max-width:170px;border:1px solid #a8c0cc30;border-radius:7px;background:#202e39;color:#dce7ed;padding:7px;font-size:11px;color-scheme:dark;cursor:pointer}
+.quality-note{font-size:10px;line-height:1.7;color:#8c9faa;margin:10px 0 0}
+.exhibit-volume{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:16px;color:#b1c1ca;font-size:12px}
+.exhibit-volume output{font-variant-numeric:tabular-nums;color:#d5b98a}
+.exhibit-volume input{grid-column:1/-1;width:100%;margin:0;accent-color:#b6cbd7;cursor:pointer}
+.exhibit-settings-panel{max-height:calc(100dvh - 180px);overflow-y:auto}
+body .exhibition .exhibit-energy{bottom:103px;left:36px;opacity:0;visibility:hidden;transition:opacity .4s}
+body .exhibition.is-operating .exhibit-energy{opacity:1;visibility:visible}
+body .exhibition .energy-assumption{display:none}
+body .exhibition .energy-result{font-size:10px;color:#8ea0ab}
+body .exhibition .energy-result b{font:400 16px/1.3 system-ui;color:#d0dedf;margin:0 3px}
+body .exhibition .energy-windows{gap:3px}
+body .exhibition .energy-windows i{width:5px;height:11px;border:0;background:#bbd5d2;opacity:.7;box-shadow:none}
+body .exhibition .energy-windows i:nth-child(2n){height:16px;opacity:.95}
+body .exhibition .energy-assumptions{bottom:35px;border:1px solid #cadbea25;border-radius:14px;background:#17212bf5;box-shadow:0 18px 60px #0007}
+body .exhibition .exhibit-hotspot{opacity:0;pointer-events:none;border:1px solid #c8dfec25;border-radius:10px;background:#17242de8;color:#dceaf1;padding:9px 13px;transition:opacity .15s}
+body .exhibition .exhibit-hotspot.is-revealed,body .exhibition .exhibit-hotspot:focus-visible{opacity:1;pointer-events:auto}
+body .exhibition .exhibit-hotspot:before{display:none}
+body .exhibition .exhibit-hotspot:hover{background:#283946}
+body .language-control{padding:2px;border:1px solid #c8dfec15;border-radius:9px;background:#19242c66}
+body .language-control button{border-radius:6px;background:none;color:#80939f;padding:6px 9px;font:11px/1.3 system-ui}
+body .language-control button[aria-pressed=true]{background:#d9e6ee13;color:#dfeaf0}
+body .global-language{right:30px;top:29px}
+.exhibition :is(button,summary,select):focus-visible{outline:2px solid #b7d9e7;outline-offset:4px}
+@media(max-width:900px){body .exhibition .exhibit-footer{width:max-content;max-width:calc(100% - 28px);gap:4px;padding:6px;bottom:18px;flex-wrap:wrap;justify-content:center}body .exhibition .exhibit-footer nav{padding-right:4px;margin:0}body .exhibition .exhibit-footer nav button{padding:9px 10px}body .exhibition .exhibit-footer :is(.exhibit-primary,.exhibit-run){padding:10px;font-size:11px!important}body .exhibition .exhibit-header{left:22px;top:22px;right:115px}body .exhibition .exhibit-header>button{display:none}body .global-language{top:24px;right:20px}body .exhibition .exhibit-copy,html[lang=en] body .exhibition .exhibit-copy{left:22px;top:94px}body .exhibition .exhibit-energy{left:22px;bottom:130px}.exhibit-settings-panel{right:-5px;width:270px}}
+@media(max-width:560px){body .exhibition .exhibit-footer{width:calc(100% - 28px);border-radius:16px}body .exhibition .exhibit-footer nav{flex-basis:100%;justify-content:center;border:0;border-bottom:1px solid #a4b7c615;padding:0 0 4px}body .exhibition .exhibit-footer nav button{flex:1}.exhibit-settings-panel{right:0;width:min(270px,calc(100vw - 55px))}body .exhibition .exhibit-energy{bottom:142px}}

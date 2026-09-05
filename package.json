@@ -1,0 +1,35 @@
+{
+  "name": "turbine-explorer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test:energy": "node --experimental-strip-types scripts/verify-energy.mjs",
+    "test:language": "node --experimental-strip-types scripts/verify-language.mjs",
+    "test:blade": "node --experimental-strip-types scripts/verify-blade.mjs",
+    "test:service": "node --experimental-strip-types scripts/verify-service.mjs",
+    "test:geometry": "node --experimental-strip-types scripts/verify-case.mjs && node --experimental-strip-types scripts/verify-assembly.mjs",
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "npm run test:energy && npm run test:language && npm run test:blade && npm run test:service && npm run test:geometry"
+  },
+  "dependencies": {
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.179.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.3"
+  },
+  "description": "Composable interactive gas turbine and cooled blade study in Three.js",
+  "license": "MIT",
+  "author": "AlexZhangji",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexZhangji/turbine-explorer.git"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

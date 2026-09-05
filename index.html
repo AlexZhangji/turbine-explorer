@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08100d" />
+    <title>Turbine Explorer | Interactive 9HA.02 Study</title>
+    <meta name="description" content="An independent interactive gas turbine study. Explore the cutaway, separate assemblies, and inspect a cooled blade. Not an OEM model." />
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="scene" aria-label="GE 9HA 燃气轮机交互剖面"></canvas>
+      <nav class="experience-switch" aria-label="展示与控制台">
+        <button type="button" data-experience="console" aria-pressed="true">运行控制台</button>
+        <button type="button" data-experience="showcase" aria-pressed="false">专注展示</button>
+      </nav>
+      <nav class="housing-switch" aria-label="机壳展示方式">
+        <button type="button" data-housing="cutaway" aria-pressed="true">剖面展示</button>
+        <button type="button" data-housing="enclosed" aria-pressed="false">完整封装</button>
+        <button type="button" data-motion-study aria-pressed="false">动静分组</button>
+      </nav>
+      <aside class="motion-legend" hidden aria-live="polite">
+        <span><i class="rotating-key"></i>蓝色：轴、动叶，随转子转动</span>
+        <span><i class="stationary-key"></i>金色：静叶，不随轴转动</span>
+        <small>灰色机壳、燃烧室和排气支撑也保持固定。颜色仅用于讲解。</small>
+      </aside>
+
+      <header class="topbar">
+        <div class="brand">
+          <span class="eyebrow">GE VERNOVA / 燃气发电研究</span>
+          <h1>燃气轮机 <span>GE 9HA.02</span></h1>
+        </div>
+        <div class="top-actions">
+          <button class="console-button active" data-action="console">收起参数</button>
+          <button class="truth-button" data-action="truth">参考资料</button>
+          <div class="status"><i></i><span><b>交互演示</b><small>公开资料重建 · 非制造模型</small></span></div>
+        </div>
+      </header>
+
+      <button class="generation-chip" data-action="open-console" aria-label="打开发电量控制台">
+        <span class="chip-heading"><i></i><b id="generation-chip-status">发电量</b></span>
+        <span class="chip-power"><strong id="generation-chip-mw">0.0</strong><em>MW</em></span>
+        <span class="chip-meta"><b id="generation-chip-kwh">0.0 kWh 已送出</b><small id="generation-chip-rate">点击运行循环启动</small></span>
+      </button>
+
+      <aside class="spec-panel">
+        <div class="panel-kicker">GE VERNOVA 9HA.02</div>
+        <div class="power"><strong>571</strong><span>MW</span></div>
+        <div class="power-label">简单循环额定净功率</div>
+        <div class="spec-grid">
+          <div><b>44.0%</b><span>净效率</span></div>
+          <div><b>23.8:1</b><span>压比</span></div>
+          <div><b>88</b><span>MW / 分钟</span></div>
+          <div><b>&lt;30</b><span>分钟 · 快速热启动</span></div>
+        </div>
+        <div class="divider"></div>
+        <p class="disclaimer">基于公开资料的示意模型。叶型与隐藏尺寸为近似重建，不是制造级 CAD。</p>
+      </aside>
+
+      <nav class="controls" aria-label="模型控制">
+        <button class="control active" data-action="spin"><span>01</span> 转子转动</button>
+        <button class="control" data-action="casing"><span>02</span> 外壳显示</button>
+        <button class="control" data-action="flow"><span>03</span> 运行循环</button>
+        <button class="control" data-action="explode"><span>04</span> 结构展开</button>
+        <button class="control" data-action="labels"><span>05</span> 部件标签</button>
+        <button class="control" data-action="sound" aria-pressed="false"><span>06</span> 开启声音</button>
+      </nav>
+
+      <nav class="review-strip" aria-label="观察视角">
+        <span>观察视角</span>
+        <button class="active" data-review="reference">参考角度</button>
+        <button data-review="hero">整体斜视</button>
+        <button data-review="axial">进气端</button>
+        <button data-review="opposite">另一侧</button>
+        <button data-review="hotpath">热端细节</button>
+        <!-- Private reference-image comparison omitted. -->
+        <button data-action="clean">纯净展示</button>
+      </nav>
+
+      <!-- Reference images intentionally excluded from the public release. -->
+
+      <aside id="service-status" class="service-status" data-stage="0" aria-live="polite">
+        <div data-operation-copy><b>运行循环 / 演示中</b><span>空气压缩后进入燃烧室，热燃气经过涡轮膨胀做功，共轴转子连接压气机与发电机。画面转速已放慢。</span></div>
+        <div data-service-copy="0"><b>装配状态 / 结构示意</b><span>动叶与轴同转，静叶、燃烧室与机壳固定。按“运行循环”启动发电演示。</span></div>
+        <div data-service-copy="1"><b>热端检视 / 已停机</b><span>封装模式抬起涡轮上壳；剖面模式保持开口。燃烧室与转子仍在原位。</span></div>
+        <div data-service-copy="2"><b>结构展开 / 已停机</b><span>下半机壳下移，燃烧室组件退出，排气段沿轴后移。核心轴系保持同轴。展示部件关系，不是检修操作顺序。</span></div>
+      </aside>
+
+      <aside class="motion-panel" aria-label="转子演示控制">
+        <div class="console-id"><span>运行控制台</span><b>机组 / 9HA.02</b></div>
+        <div class="motion-heading"><span>显示转速</span><strong id="speed-value">35%</strong></div>
+        <input id="speed-control" type="range" min="0" max="100" value="35" step="1" aria-label="转子显示速度" />
+        <div class="motion-scale"><span>停止</span><span>慢速观察</span></div>
+        <div class="speed-live"><span id="speed-state">调整中</span><i><b id="speed-live-bar"></b></i></div>
+        <div class="motion-actions">
+          <button data-action="kinematic">展开状态转动示意</button>
+          <button data-action="reset-camera">恢复视角</button>
+        </div>
+        <p id="motion-note">此滑块只改变视觉转速，不是实际转速，也不改变发电负载。</p>
+        <details class="audio-panel" aria-label="声音设置">
+          <summary>声音与输出检查</summary>
+          <div class="motion-heading"><label for="volume-control">声音音量</label><output id="volume-value">25%</output></div>
+          <input id="volume-control" type="range" min="0" max="100" value="25" aria-label="声音音量" />
+          <button id="audio-preview" type="button">试听运行声场（5 秒）</button>
+          <button id="speaker-test" type="button">检查扬声器（两声提示音）</button>
+          <meter id="audio-meter" min="0" max=".15" value="0" aria-label="网页音频输出电平"></meter>
+          <p id="audio-status" role="status">声音未开启，请点试听</p>
+          <small>合成音效，非实机录音。电平有变化但听不到时，请检查此标签页静音及系统输出设备。</small>
+        </details>
+      </aside>
+
+      <aside class="generation-panel" aria-label="发电量估算">
+        <div class="generation-heading"><span><i></i> 发电功率</span><b id="generation-status">未运行</b></div>
+        <div class="generation-power"><strong id="generation-mw">0.0</strong><span>MW</span></div>
+        <div class="generation-total"><span>累计送出电量</span><b id="generation-kwh">0 kWh</b></div>
+        <input id="load-control" type="range" min="30" max="100" value="100" step="1" aria-label="发电负载百分比" />
+        <div class="load-scale"><span>负载 30%</span><b id="load-value">100%</b><span>满负载</span></div>
+        <div class="generation-meta">
+          <div><span>燃机效率</span><b>44.0% LHV</b></div>
+          <div><span>燃料热输入</span><b id="fuel-input">0 MWth</b></div>
+        </div>
+        <div class="combined-cycle-note"><span>联合循环：余热锅炉与汽轮机</span><b>最高 64.3%（低位热值）</b></div>
+        <button id="reset-energy">电量清零</button>
+        <p>按 571 MW 额定功率线性估算。不是实际机组实时数据；变负载效率暂按常数处理。负载与显示转速独立。</p>
+      </aside>
+
+      <section class="legend" aria-label="机组分区">
+        <button data-focus="compressor"><i class="blue"></i><span>01</span><b>压气机</b><small>14 级</small></button>
+        <button data-focus="combustion"><i class="amber"></i><span>02</span><b>燃烧室</b><small>DLN 2.6e</small></button>
+        <button data-focus="turbine"><i class="red"></i><span>03</span><b>涡轮</b><small>4 级</small></button>
+        <button data-focus="exhaust"><i class="white"></i><span>04</span><b>排气段</b><small>640 C</small></button>
+      </section>
+
+      <div class="hint">左键旋转 / 右键平移 / 滚轮缩放 / 双击复位</div>
+      <div id="labels" class="labels" aria-hidden="true"></div>
+      <section class="truth-library" aria-hidden="true">
+        <div class="truth-shell">
+          <div class="truth-head">
+            <div>
+              <span class="eyebrow">参考资料归档 / 2026-09-03</span>
+              <h2>参考资料库</h2>
+            </div>
+            <button class="truth-close" aria-label="关闭资料库">关闭 ×</button>
+          </div>
+          <div class="truth-body">
+            <div class="data-column">
+              <div class="section-label">公开规格 <span>50 Hz / ISO 工况</span></div>
+              <div class="confidence-key">
+                <span><i class="official"></i>官方资料</span>
+                <span><i class="user"></i>用户参考图</span>
+                <span><i class="inferred"></i>推定结构</span>
+              </div>
+
+              <table class="data-table">
+                <thead><tr><th>参数</th><th>9HA.01</th><th>9HA.02</th><th>来源</th></tr></thead>
+                <tbody>
+                  <tr><td>简单循环净功率</td><td>448 MW</td><td>571 MW</td><td><i class="official"></i></td></tr>
+                  <tr><td>简单循环净效率</td><td>42.9%</td><td>44.0%</td><td><i class="official"></i></td></tr>
+                  <tr><td>净热耗率（低位热值）</td><td>8398 kJ/kWh</td><td>8166 kJ/kWh</td><td><i class="official"></i></td></tr>
+                  <tr><td>压比</td><td>22.8:1</td><td>23.8:1</td><td><i class="official"></i></td></tr>
+                  <tr><td>排气温度</td><td>648 C</td><td>640 C</td><td><i class="official"></i></td></tr>
+                  <tr><td>爬坡速率</td><td>65 MW/min</td><td>88 MW/min</td><td><i class="official"></i></td></tr>
+                  <tr><td>快速响应热启动</td><td>&lt;30 min</td><td>&lt;30 min</td><td><i class="official"></i></td></tr>
+                  <tr><td>1×1 联合循环净功率</td><td>680 MW</td><td>838 MW</td><td><i class="official"></i></td></tr>
+                  <tr><td>2×1 联合循环净效率</td><td>63.8%</td><td>64.3%</td><td><i class="official"></i></td></tr>
+                </tbody>
+              </table>
+
+              <div class="architecture">
+                <h3>结构依据与边界</h3>
+                <div class="arch-grid">
+                  <div><strong>14</strong><span>压气机级数</span><i class="official"></i></div>
+                  <div><strong>4</strong><span>涡轮级数</span><i class="official"></i></div>
+                  <div><strong>16</strong><span>燃烧室数量（推定）</span><i class="inferred"></i></div>
+                  <div><strong>1</strong><span>同轴转子</span><i class="user"></i></div>
+                </div>
+                <p>16 个燃烧室沿用已有 GE 与行业资料推定，当前官方规格表未列出该数量。叶片数量、截面、间隙、壁厚及隐藏管路均为近似重建。</p>
+              </div>
+
+              <div class="architecture service-contract">
+                <h3>结构展开说明</h3>
+                <ol>
+                  <li><b>运行示意</b><span>同轴转子转动，静叶与机壳固定。</span></li>
+                  <li><b>热端检视</b><span>封装模式抬起涡轮上壳。剖面模式保留原来的开口，不强制补回机壳。</span></li>
+                  <li><b>组件展开</b><span>可见上壳分段抬起后，燃烧室组件径向退出。转子保持原位，避免穿过尚未拆开的静叶环。</span></li>
+                </ol>
+                <p>这是部件关系示意，不是检修操作指南。未建立完整静叶拆卸、吊具与管路断接模型，不能据此验证真实拆装顺序和间隙。</p>
+              </div>
+
+              <div class="evidence-note"><b>版本差异</b> 2025 年 11 月规格表列出 9HA.01 为 448 MW，而同份资料摘要写作 488–571 MW。这里保留表格数值并提示差异。</div>
+
+              <div class="source-list">
+                <h3>原始资料</h3>
+                <a href="https://www.gevernova.com/gas-power/products/gas-turbines/9ha" target="_blank" rel="noreferrer"><span>01</span> GE VERNOVA 9HA 产品页面</a>
+                <a href="https://www.gevernova.com/content/dam/gepower-new/global/en_US/downloads/gas-new-site/products/gas-turbines/9ha-fact-sheet-product-specifications.pdf" target="_blank" rel="noreferrer"><span>02</span> 9HA 规格表</a>
+                <a href="https://www.gevernova.com/content/dam/gepower-new/global/en_US/downloads/gas-new-site/catalog/GEA35241-2025-GE-Vernova-Gas-Power-Catalog.pdf" target="_blank" rel="noreferrer"><span>03</span> 2025 燃气发电产品目录</a>
+                <a href="https://www.gevernova.com/gas-power/resources/articles/2025/the-evolution-of-the-ha-gas-turbines" target="_blank" rel="noreferrer"><span>04</span> HA 结构介绍</a>
+                <a href="https://www.gevernova.com/content/dam/gepower-new/global/en_US/downloads/gas-new-site/resources/reference/ger-3620p-heavy-duty-gas-turbine-operating-and-maintenance-considerations.pdf" target="_blank" rel="noreferrer"><span>05</span> 重型燃机运行与维护资料</a>
+                <a href="https://www.gevernova.com/gas-power/resources/education/how-turbine-combustion-works" target="_blank" rel="noreferrer"><span>06</span> 燃烧与轴系工作原理</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="loading"><div></div><span>正在加载 9HA</span></div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

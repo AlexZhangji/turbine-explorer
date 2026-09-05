@@ -1,0 +1,144 @@
+.parts-launch { color: #7fd6e6 !important; border-left: 1px solid #3c5864 !important; }
+.parts-lab { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #0c1820; color: #dfe9ec; font: 14px/1.6 "Microsoft YaHei", sans-serif; }
+.parts-lab[open] { display: grid; grid-template-columns: 220px minmax(280px,1fr) 290px; grid-template-rows: 96px minmax(0,1fr) 38px; }
+.parts-lab::backdrop { background: #081016; }
+.parts-lab [hidden] { display: none !important; }
+.parts-lab button { font: inherit; cursor: pointer; color: inherit; background: #132731; border: 1px solid #304954; padding: 10px 12px; border-radius: 4px; }
+.parts-lab button:hover, .parts-lab button:focus-visible { border-color: #8bdddf; background: #233d48; }
+.parts-lab button:focus-visible { outline: 2px solid #8bdddf; outline-offset: 2px; }
+.parts-lab button[aria-pressed="true"] { background: #213e49; border-color: #77cddd; }
+.lab-header { grid-column: 1/-1; display:flex; justify-content:space-between; align-items:center; padding: 16px 28px; border-bottom:1px solid #2b3d47; background:#0b151c; }
+.lab-kicker { color: #75bfcc; font-size: 11px; letter-spacing: .16em; }
+.lab-header h1 { margin: 2px 0 0; font-size: 26px; font-weight: 500; }
+.lab-header h1 span { color: #8b9ca4; font-size: 12px; margin-left: 22px; letter-spacing: .07em; }
+.lab-header-actions { display:flex; gap:10px; }
+.lab-library-toggle { display:none; }
+.parts-lab.blade-hero[open]:not(.library-expanded) { grid-template-columns:minmax(0,1fr) 310px; }
+.parts-lab.blade-hero:not(.library-expanded) .lab-library { display:none; }
+.parts-lab.blade-hero .lab-library-toggle { display:block; }
+.parts-lab.blade-hero .lab-header { background:#0a121a; }
+.parts-lab.blade-hero .lab-details { background:linear-gradient(160deg,#11212b,#0b151e); padding:30px 24px; }
+.parts-lab.blade-hero .lab-details h2 { font-size:29px; line-height:1.3; letter-spacing:.03em; }
+.parts-lab.blade-hero .lab-viewport { box-shadow:inset 0 0 90px #03091050; }
+.parts-lab .lab-flow-toggle { width:100%; margin:12px 0 0; font-size:12px; text-align:left; padding:10px 12px; color:#8fdfdf; }
+.parts-lab .lab-flow-toggle[aria-pressed="true"] { background:#142e35; border-color:#345960; }
+.lab-library { padding: 20px 14px; overflow: auto; border-right: 1px solid #293b45; background: #0d1b24; }
+.lab-section-title { margin: 0 4px 17px; font-size: 13px; }.lab-section-title span { float:right; color:#75929c; font-size:10px; }
+.lab-part-list { display:grid; gap:8px; }.lab-part-list button { text-align:left; padding:12px; background:#0f202a; }
+.lab-part-list small, .lab-part-list strong, .lab-part-list span { display:block; }.lab-part-list small { color:#829da8; font-size:10px; }.lab-part-list strong { font-weight:500; margin:7px 0; font-size:13px; }.lab-part-list span { font-size:10px; color:#77bdcc; }
+.lab-library-note { color:#8198a3; font-size:11px; padding:8px; }
+.lab-viewport { position:relative; overflow:hidden; min-width:0; }.lab-viewport canvas { width:100%; height:100%; display:block; touch-action:none; }
+.lab-breadcrumb { position:absolute; top:18px; left:22px; font-size:11px; color:#809aa6; pointer-events:none; }.lab-breadcrumb span { margin:0 9px; }.lab-breadcrumb b { font-weight:400; color:#cbdde2; }
+.lab-stage-caption { position:absolute; left:22px; bottom:62px; pointer-events:none; }.lab-state { color:#c2d8df; font-size:13px; }.lab-stage-caption p { color:#748f9c; font-size:11px; margin:4px 0; }
+.lab-camera { position:absolute; left:22px; bottom:20px; display:flex; gap:6px; }.lab-camera button { padding:5px 13px; font-size:11px; background:#11242dd9; }
+.parts-lab .lab-pull { position:absolute; transform:translateX(-50%); padding:7px 12px; color:#e5cc87; border:1px solid #a49463; background:#273032ed; cursor:grab; touch-action:none; font-size:11px; }
+.parts-lab .lab-pull:active { cursor:grabbing; }
+.lab-model-label { position:absolute; pointer-events:none; transform:translate(-50%,10px); padding:3px 8px; border-left:1px solid #83c4d2; background:#0a161fdf; color:#b8d6df; font-size:10px; white-space:nowrap; }
+.blade-hero .lab-model-label { font-size:11px; padding:6px 11px; letter-spacing:.06em; background:#0a1720ba; border-left-color:#c3ab79; }
+.lab-details { padding:22px; overflow:auto; border-left:1px solid #293b45; background:#101f28; }.lab-details h2 { font-size:23px; line-height:1.35; font-weight:500; margin:10px 0 14px; }.lab-description { color:#a5bac5; font-size:12px; margin-bottom:23px; }
+.lab-assembly-tools label { display:block; font-size:12px; }.lab-assembly-tools output { float:right; color:#78d3df; }.lab-assembly-tools input { width:100%; margin:17px 0; accent-color:#7bd6df; }
+.lab-button-row { display:flex; gap:8px; }.lab-button-row button { flex:1; font-size:12px; padding:8px; }.parts-lab .lab-primary { width:100%; background:#badde0; color:#102c36; margin-top:10px; border:0; font-weight:600; }
+.lab-feature { display:block; width:100%; text-align:left; margin:24px 0 18px; padding:16px !important; border-color:#797151 !important; background:linear-gradient(135deg,#333527,#1b292a) !important; }.lab-feature small { color:#c4b57e; font-size:10px; }.lab-feature strong { display:block; margin:9px 0; font-size:14px; font-weight:500; }.lab-feature span { font-size:10px; color:#bcc4b4; }
+.lab-back { width:100%; text-align:left; margin-bottom:20px; font-size:12px !important; }.lab-view-tabs { display:flex; gap:4px; }.lab-view-tabs button { flex:1; padding:7px 3px; font-size:11px; }.lab-science h3 { margin-top:22px; font-size:15px; font-weight:500; }.lab-science p,.lab-science li { font-size:12px; color:#b6c8d0; }.lab-science ol { padding-left:17px; }.lab-science li { margin-bottom:8px; }.lab-science small { font-size:10px; display:block; color:#8199a4; border-top:1px solid #30404a; padding-top:13px; }
+.lab-sources { margin-top:24px; border-top:1px solid #30404a; padding-top:15px; font-size:11px; color:#94b4c0; }.lab-sources summary { cursor:pointer; }.lab-sources a { display:block; color:#91c3d0; text-decoration:none; padding:8px 0; }
+.lab-science .material-stack{list-style:none;padding:0;display:grid;gap:12px}
+.lab-science .material-stack li{margin:0;padding-left:10px;border-left:2px solid #adbbbc}
+.lab-science .material-stack li:nth-child(2){border-color:#927a60}
+.lab-science .material-stack li:nth-child(3){border-color:#b9a778}
+.lab-science .material-stack b{display:block;font-size:12px;color:#e0e8e8;font-weight:500}
+.lab-science .material-stack span{display:block;margin-top:3px;font-size:11px;line-height:1.65;color:#a8bcc6}
+.lab-science .material-source{display:block;margin-top:12px;font-size:11px;color:#8ac8d4;text-decoration:none}
+.lab-footer { grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:0 24px; background:#091219; border-top:1px solid #293b45; font-size:10px; letter-spacing:.06em; color:#7f9aa7; }
+@media(max-width:1050px){.parts-lab[open]{grid-template-columns:170px minmax(200px,1fr) 250px}.lab-details{padding:16px}.lab-header h1 span{display:none}.lab-library{padding:16px 8px}}
+@media(max-width:700px){.parts-lab[open]{grid-template-columns:1fr;grid-template-rows:74px 65px minmax(260px,45dvh) auto 38px;overflow:auto}.lab-header{padding:12px 16px}.lab-header h1{font-size:21px}.lab-library{padding:5px 10px;overflow-x:auto}.lab-section-title,.lab-library-note{display:none}.lab-part-list{display:flex;width:max-content;gap:6px}.lab-part-list button{padding:7px 10px}.lab-part-list strong{font-size:11px;margin:0}.lab-part-list small,.lab-part-list span{display:none}.lab-details{overflow:visible}.lab-footer{font-size:8px;padding:0 8px}.lab-breadcrumb{top:8px;left:12px}.lab-stage-caption{display:none}}
+@media(max-width:700px){.parts-lab.blade-hero[open]:not(.library-expanded){grid-template-columns:1fr;grid-template-rows:74px minmax(320px,55dvh) auto 38px}.lab-header-actions{gap:5px}.lab-header-actions button{font-size:11px;padding:7px}.parts-lab.blade-hero .lab-details{padding:20px}}
+
+/* A quiet exhibit label. Long-form science stays available on request. */
+body .parts-lab.blade-hero[open]:not(.library-expanded){grid-template-columns:minmax(0,1fr) 300px;grid-template-rows:72px minmax(0,1fr)}
+body .parts-lab.blade-hero .lab-header{grid-column:1/-1;justify-content:flex-end;background:#091219;border-bottom:0;padding:14px 24px}
+body .parts-lab.blade-hero .lab-header>div:first-child,
+body .parts-lab.blade-hero .lab-details>.lab-kicker,
+body .parts-lab.blade-hero .lab-stage-caption,
+body .parts-lab.blade-hero .lab-breadcrumb,
+body .parts-lab.blade-hero .lab-footer{display:none}
+body .parts-lab.blade-hero .lab-details{padding:54px 24px 28px;background:#0c171e;border-left:1px solid #c8dbe810}
+body .parts-lab.blade-hero .lab-details h2{font-family:Manrope,'Microsoft YaHei',sans-serif;font-size:27px;letter-spacing:-.045em;line-height:1.2;margin:0 0 10px}
+body .parts-lab.blade-hero .lab-description{font-size:10px;color:#8296a2;margin:0 0 28px;line-height:1.6}
+body .parts-lab.blade-hero .lab-back{border:0;background:none;padding:0;font-size:10px!important;color:#849aa7;margin-bottom:25px}
+body .parts-lab.blade-hero .lab-view-tabs{gap:0;border-bottom:1px solid #bed3df25}
+body .parts-lab.blade-hero .lab-view-tabs button{border:0;border-radius:0;padding:10px 3px;background:none;font-size:10px;color:#92a7b2;line-height:1.5}
+body .parts-lab.blade-hero .lab-view-tabs button[aria-pressed=true]{background:none;color:#edf1ee;box-shadow:inset 0 -1px #c5d4d8}
+body .parts-lab.blade-hero .lab-flow-toggle{background:none;border:0;padding:12px 0;margin:8px 0 20px;color:#96cfce;font-size:11px;display:flex;align-items:center;gap:9px}
+body .parts-lab.blade-hero .lab-flow-toggle::before{content:'';height:5px;width:5px;border-radius:50%;background:#506470;flex-shrink:0}
+body .parts-lab.blade-hero .lab-flow-toggle[aria-pressed=true]::before{background:#85cfc9;box-shadow:0 0 9px #85cfc930}
+.lab-material-key{margin:0 0 26px;display:grid;gap:17px}
+.lab-material-key>div{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.lab-material-key dt{font-size:13px;color:#dfdbce}
+.lab-material-key>div:nth-child(2) dt{color:#b29b86}
+.lab-material-key>div:nth-child(3) dt{color:#c5b17f}
+.lab-material-key>div:nth-child(4) dt{color:#9cb9ca}
+.lab-material-key dd{margin:0;font-size:10px;line-height:1.5;text-align:right;color:#8fa4b0}
+.lab-technical{border-top:1px solid #bed3df18;padding-top:15px}
+.lab-technical summary{cursor:pointer;font-size:11px;color:#a2b7c1}
+body .parts-lab.blade-hero .lab-sources{margin-top:15px;padding-top:15px;border-color:#bed3df18;font-size:11px}
+body .parts-lab.blade-hero .lab-model-label{opacity:0;transition:opacity .15s}
+body .parts-lab.blade-hero .lab-viewport:hover .lab-model-label{opacity:0}
+body .parts-lab.blade-hero .lab-camera button{background:transparent;border:0;color:#839aa6;font-size:10px;padding:7px 10px}
+body .parts-lab.blade-hero .lab-camera button:hover{color:#e2eaea}
+@media(max-width:700px){body .parts-lab.blade-hero[open]:not(.library-expanded){grid-template-columns:1fr;grid-template-rows:64px minmax(320px,54dvh) auto}body .parts-lab.blade-hero .lab-header{padding:12px}body .parts-lab.blade-hero .lab-details{padding:26px 24px}.lab-material-key{gap:12px}}
+
+/* The object owns the viewport. Controls and reference notes never resize it. */
+.lab-blade-dock,.lab-blade-title,.lab-blade-summary{display:none}
+body .parts-lab.blade-hero[open]{display:block;overflow:hidden}
+body .parts-lab.blade-hero .lab-viewport{position:absolute;inset:0;box-shadow:none}
+body .parts-lab.blade-hero .lab-header{position:absolute;right:22px;top:18px;z-index:4;padding:0;background:none;pointer-events:none}
+body .parts-lab.blade-hero .lab-header-actions{pointer-events:auto;gap:16px;align-items:center}
+body .parts-lab.blade-hero .lab-header-actions>button{padding:7px 0;border:0;background:none;font-size:11px;color:#aab5b8}
+body .parts-lab.blade-hero .language-control{background:none;border:0;padding:0}
+body .parts-lab.blade-hero .language-control button{padding:6px 8px;font-size:10px;border:0;background:none}
+body .parts-lab.blade-hero .lab-blade-title{display:block;position:absolute;left:30px;top:26px;pointer-events:none}
+body .parts-lab.blade-hero .lab-blade-title h1{font:400 24px/1.2 Manrope,sans-serif;letter-spacing:-.04em;margin:0 0 7px;color:#d8dedf}
+body .parts-lab.blade-hero .lab-blade-title span{font-size:10px;color:#788589}
+body .parts-lab.blade-hero .lab-details{display:none;position:absolute;z-index:3;right:22px;top:76px;bottom:100px;width:280px;box-sizing:border-box;padding:24px;background:#11191bef;backdrop-filter:blur(20px);border:1px solid #bac7cc20;border-radius:12px;overflow:auto}
+body .parts-lab.blade-hero.blade-info-open .lab-details{display:block}
+body .parts-lab.blade-hero .lab-details h2{font-size:20px}
+body .parts-lab.blade-hero .lab-blade-dock{position:absolute;z-index:4;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;padding:7px 16px;background:#11191bd9;backdrop-filter:blur(16px);border:1px solid #bac7cc25;border-radius:12px;white-space:nowrap}
+body .parts-lab.blade-hero .lab-view-tabs{border:0;gap:14px}
+body .parts-lab.blade-hero .lab-view-tabs button{padding:10px 0;font-size:11px;flex:none;color:#929d9f}
+body .parts-lab.blade-hero .lab-view-tabs button[aria-pressed=true]{color:#edf0ef}
+body .parts-lab.blade-hero .lab-flow-toggle{width:auto;margin:0;padding:8px 0;font-size:11px}
+body .parts-lab.blade-hero .lab-info-toggle{background:none;border:0;border-left:1px solid #bac7cc25;border-radius:0;padding:8px 0 8px 18px;font-size:11px;color:#aeb8ba}
+body .parts-lab.blade-hero .lab-info-toggle[aria-expanded=true]{color:#fff}
+body .parts-lab.blade-hero .lab-camera{left:22px;bottom:29px;gap:2px}
+body .parts-lab.blade-hero .lab-model-label{display:none}
+body .parts-lab.blade-hero.library-expanded .lab-library{display:block;position:absolute;left:22px;top:96px;bottom:98px;width:230px;z-index:3;border:1px solid #bac7cc25;border-radius:12px;background:#11191bef;backdrop-filter:blur(20px)}
+body .parts-lab.blade-hero .lab-material-key dt{color:#c2c7c6}
+body .parts-lab.blade-hero .lab-blade-summary{display:block;position:absolute;left:30px;top:148px;width:230px;padding:0 0 0 16px;border-left:1px solid #b8c6c633;pointer-events:none}
+.lab-summary-heading{display:block;color:#9ea8aa;font-size:11px;letter-spacing:.07em;margin-bottom:22px}
+.lab-blade-summary .lab-material-key{gap:19px;margin-bottom:24px}
+.lab-blade-summary .lab-material-key dt{font-size:15px;letter-spacing:-.02em}
+.lab-blade-summary .lab-material-key dd{font-size:11px;color:#88999e;max-width:145px}
+.lab-blade-summary .lab-one-line{font-size:12px;line-height:1.7;color:#b7c1c4}
+.lab-cooling-note{display:flex;align-items:center;gap:8px;color:#94bdc3;font-size:11px;margin:0 0 14px}
+.lab-cooling-note i{width:5px;height:5px;border-radius:50%;background:#80b8c3}
+.lab-blade-summary>small{font-size:9px;color:#667a80;line-height:1.6}
+@media(max-width:1100px){body .parts-lab.blade-hero .lab-camera{bottom:90px;left:50%;transform:translateX(-50%)}}
+@media(max-width:700px){
+ body .parts-lab.blade-hero .lab-header{right:14px;top:12px;left:14px}
+ body .parts-lab.blade-hero .lab-header-actions{width:100%;justify-content:flex-end;gap:14px}
+ body .parts-lab.blade-hero .lab-blade-title{left:20px;top:72px}
+ body .parts-lab.blade-hero .lab-blade-title h1{font-size:21px}
+ body .parts-lab.blade-hero .lab-blade-summary{top:145px;left:20px;width:calc(100% - 40px);box-sizing:border-box;padding:0;border:0}
+ .lab-blade-summary .lab-summary-heading{display:none}
+ .lab-blade-summary .lab-material-key{grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 12px}
+ .lab-blade-summary .lab-material-key>div{display:block}
+ .lab-blade-summary .lab-material-key dt{font-size:12px;margin-bottom:4px}
+ .lab-blade-summary .lab-material-key dd{text-align:left;font-size:9px;line-height:1.3}
+ .lab-blade-summary .lab-cooling-note{display:inline-flex;margin:0 8px 0 0;font-size:9px}
+ .lab-blade-summary>small{font-size:8px}
+ body .parts-lab.blade-hero .lab-blade-dock{bottom:14px;width:calc(100% - 28px);box-sizing:border-box;justify-content:center;gap:8px 16px;flex-wrap:wrap;padding:8px 10px}
+ body .parts-lab.blade-hero .lab-view-tabs{width:100%;justify-content:center;gap:22px}
+ body .parts-lab.blade-hero .lab-camera{bottom:124px}
+ body .parts-lab.blade-hero .lab-details{top:124px;bottom:156px;right:14px;width:min(300px,calc(100% - 28px));padding:20px}
+ body .parts-lab.blade-hero.library-expanded .lab-part-list{display:grid;width:auto}
+}
